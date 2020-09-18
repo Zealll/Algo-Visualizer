@@ -7,7 +7,7 @@ const Node = props => {
     // Latitude  left => right
     const [coor, setCoor] = useState(props.coor)
     
-    const [start, setStart] = useState(coor === 1930)
+    const [start, setStart] = useState(props.cell.lon === 13 && props.cell.lat === 20)
     const [end, setEnd] = useState(coor === 1980)
     const [distance, setDistance] = useState(start ? 0 : Infinity)
 
