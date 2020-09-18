@@ -3,33 +3,45 @@ import React, {useState} from 'react';
 
 import Node from './node/Node.js'
 
+import {dijkstras} from './algorithms/Dijkstras.js'
+
 function App() {
   const size = window.screen
-  let arr = []
   let parArr = []
-  for (let i = 1; i <= (size.availWidth / 100 * 90) / 20; i++) {
-    arr.push(i)
-  }
-
+ 
   for (let j = 1; j <= (size.availHeight / 100 * 70) / 20; j++) {
-    parArr.push(j)
+    const box = []
+
+    for (let i = 1; i <= (size.availWidth / 100 * 90) / 20; i++) {
+      box.push(Number(`${j}${i}`))
+    }
+
+    parArr.push(box)
   }
 
-  console.log(parArr)
+  dijkstras(parArr)
+
+  // const maap = new Map()
+  // console.log(parArr.maap())
+  
+
+  
+
+  // console.log(parArr)
   return (
     <div className="App">
       <header className="App-header">
-        {parArr.map(eachPar => (
+        {parArr.map((eachPar, index) => (
           <div className='flex'>
-            {arr.map(each => (
+            {eachPar.map(each => (
               <Node 
-                lat={eachPar}
-                lon={each}
+                lon={index + 1}
+                lat={each}
+                coor={each}
               />
             ))}
           </div>
         ))}
-        
       </header>
       <div>
 
