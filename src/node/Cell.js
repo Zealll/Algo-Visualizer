@@ -14,7 +14,8 @@ class Cell {
     }
 
     visit() {
-        this.visited = true
+        this.visited = !this.visited
+        return this.visited
     }
 
     coor() {

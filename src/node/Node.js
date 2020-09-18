@@ -2,22 +2,32 @@ import React, { useState } from 'react'
 
 
 const Node = props => {
-    const [visited, setVisited] = useState(false)
-    // Longitude up => down
-    // Latitude  left => right
-    const [coor, setCoor] = useState(props.coor)
+    const [visited, setVisited] = useState(props.cell.visited)
+    const [stateUpdate, setStateUpdate] = useState(false)
     
-    const [start, setStart] = useState(props.cell.lon === 13 && props.cell.lat === 20)
-    const [end, setEnd] = useState(coor === 1980)
-    const [distance, setDistance] = useState(start ? 0 : Infinity)
+    // const [start, setStart] = useState(props.cell.lon === 13 && props.cell.lat === 20)
+    // const [end, setEnd] = useState(props.cell.lon === 13 && props.cell.lat === 40)
+    // const [distance, setDistance] = useState(start ? 0 : Infinity)
 
-    
+    // console.log(props.start)
 
     // console.log(lat)
-    // console.log('hello')
+    // console.log(props.grid)
+    const clickHandler = () => {
+        setVisited(props.cell.visit())
+    }
+
+    const stateUpdateF = (lon, lat) => {
+        if (lon === props.cell.lon && lat === props.cell.lat) {
+            setStateUpdate(!stateUpdate)
+        }
+    }
+
+    console.log('hello')
+
     // console.log(start, lat, lon)
     return (
-        <div onClick={() => {setVisited(!visited)}} className={visited ? `square visited ${start ? 'start' : ' '} ${end ? 'end' : ' '}` : `square ${start} ${start ? 'start' : ' '} ${end ? 'end' : ' '}`}>
+        <div onClick={() => {clickHandler()}} className={visited ? `square visited ${props.start.lon === props.cell.lon & props.start.lat === props.cell.lat ? 'start' : ' '} ${props.end.lon === props.cell.lon & props.end.lat === props.cell.lat ? 'end' : ' '}` : `square ${props.start.lon === props.cell.lon & props.start.lat === props.cell.lat ? 'start' : ' '} ${props.end.lon === props.cell.lon & props.end.lat === props.cell.lat ? 'end' : ' '}`}>
         </div>
     )
 }
