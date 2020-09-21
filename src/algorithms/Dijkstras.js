@@ -33,48 +33,32 @@ export function dijkstras(nodes, startNode, endNode, func) {
         setTimeout(() => {
             return recursion()
         }, 1)
-        // return recursion()
     }
 
     recursion()
-    // console.log(document.getElementById(`Row-${13}-Col-${20}`).className = `${document.getElementById(`Row-${13}-Col-${20}`).className} visited`)
 
     function shortestPath(endN, shortArr) {
         const shortest = shortArr
         let curr = endN
 
-
         if (curr) {
             while (curr) {
-                shortest.unshift(curr)
-                // console.log('hello')
-            
+                shortest.push(curr)
+
                 curr = curr.prevNode
-            }  
+            } 
+
             return shortestPath(curr, shortest)
-        } else if (shortest.length) {
-            // for (let i of shortest) {
-                console.log(shortest)
+
+        } else if (shortest.length) {     
+                document.getElementById(`Row-${shortest[shortest.length - 1].lon}-Col-${shortest[shortest.length - 1].lat}`).className = `${document.getElementById(`Row-${shortest[shortest.length - 1].lon}-Col-${shortest[shortest.length - 1].lat}`).className} shortest`
                 
-                document.getElementById(`Row-${shortest[0].lon}-Col-${shortest[0].lat}`).className = `${document.getElementById(`Row-${shortest[0].lon}-Col-${shortest[0].lat}`).className} shortest`
-                shortest.shift()
+                shortest.pop()
+                
                 setTimeout(() => {
                     return shortestPath(curr, shortest)
                 }, 10)
-                
-            // }
         }
-
-        
-        
-        
-        // while (curr) {
-            
-        // }
-
-
-        // for (let i of shortest) {
-        // }
     }
     // console.log(nodes)
     // console.log(endNode)
