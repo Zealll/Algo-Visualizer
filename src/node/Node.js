@@ -17,17 +17,17 @@ const Node = props => {
         setVisited(props.cell.visit())
     }
 
-    const stateUpdateF = (lon, lat) => {
-        if (lon === props.cell.lon && lat === props.cell.lat) {
-            setStateUpdate(!stateUpdate)
-        }
-    }
+    // const stateUpdateF = (lon, lat) => {
+    //     if (lon === props.cell.lon && lat === props.cell.lat) {
+    //         setStateUpdate(!stateUpdate)
+    //     }
+    // }
 
-    console.log('hello')
+    // console.log('hello')
 
     // console.log(start, lat, lon)
     return (
-        <div onClick={() => {clickHandler()}} className={visited ? `square visited ${props.start.lon === props.cell.lon & props.start.lat === props.cell.lat ? 'start' : ' '} ${props.end.lon === props.cell.lon & props.end.lat === props.cell.lat ? 'end' : ' '}` : `square ${props.start.lon === props.cell.lon & props.start.lat === props.cell.lat ? 'start' : ' '} ${props.end.lon === props.cell.lon & props.end.lat === props.cell.lat ? 'end' : ' '}`}>
+        <div id={`Row-${props.cell.lon}-Col-${props.cell.lat}`} onClick={() => {clickHandler()}} className={visited ? `square visited ${props.start.lon === props.cell.lon & props.start.lat === props.cell.lat ? 'start' : ' '} ${props.end.lon === props.cell.lon & props.end.lat === props.cell.lat ? 'end' : ' '}` : `square ${props.start.lon === props.cell.lon & props.start.lat === props.cell.lat ? 'start' : ' '} ${props.end.lon === props.cell.lon & props.end.lat === props.cell.lat ? 'end' : ' '}`}>
         </div>
     )
 }

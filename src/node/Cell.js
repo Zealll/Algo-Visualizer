@@ -11,12 +11,29 @@ class Cell {
         this.south = this.lon === this.maxLon ? false : true
         this.west = this.lat === 0 ? false : true
         this.weight = 0
+        this.prevNode = null
     }
 
     visit() {
         this.visited = !this.visited
         return this.visited
     }
+
+    setDistance(len) {
+        this.distance = len
+    }
+
+    findNeighbors(grid) {
+        const arr = []
+        if (this.north) arr.push(grid[this.lon - 1][this.lat])
+        if (this.east) arr.push(grid[this.lon][this.lat + 1])
+        if (this.south) arr.push(grid[this.lon + 1][this.lat])
+        if (this.west) arr.push(grid[this.lon][this.lat - 1])
+
+        return arr.filter(each => !each.visited)
+    }
+
+
 
     coor() {
         // console.log(this.lon, this.lat, this.maxLon, this.maxLat)

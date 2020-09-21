@@ -10,8 +10,8 @@ import { array } from 'prop-types';
 
 function App() {
   const size = window.screen
-  // let parArr = []
-  const [parArr, setParArr] = useState([])
+  let parArr = []
+  // const [parArr, setParArr] = useState([])
   let rows = Math.floor((size.availHeight / 100 * 70) / 20)
   let columns = Math.floor((size.availWidth / 100 * 90) / 20)
   const [start, setStart] = useState({lon: 13, lat: 20})
@@ -20,19 +20,21 @@ function App() {
 
   useEffect(() => {
     const arr = []
-    for (let j = 0; j < rows; j++) {
-      const box = []
-  
-      for (let i = 0; i < columns; i++) {
-        const cell = new Cell(j, i, rows - 1, columns - 1)
-  
-        box.push(cell)
-      }
-      // console.log(Math.floor((size.availHeight / 100 * 70) / 20))
-      
-      setParArr(parArr => [...parArr, box])
-    }
+    
   },[])
+
+  for (let j = 0; j < rows; j++) {
+    const box = []
+
+    for (let i = 0; i < columns; i++) {
+      const cell = new Cell(j, i, rows - 1, columns - 1)
+
+      box.push(cell)
+    }
+    // console.log(Math.floor((size.availHeight / 100 * 70) / 20))
+    
+    parArr.push(box)
+  }
   
 
   // const toggle = (lon, lat) => {
@@ -41,8 +43,11 @@ function App() {
   // }
 
   setTimeout(() => {
-    dijkstras(parArr, parArr[13][20], parArr[13][40], setParArr)
-  }, 5000)
+    dijkstras(parArr, parArr[start.lon][start.lat], parArr[end.lon][end.lat])
+  }, 1000)
+  
+
+  // console.log(parArr[13][20])
 
   
   // console.log(parArr)
@@ -65,11 +70,11 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        {parArr.map((eachPar, index) => (
-          <div key={`Row-${index}`} className='flex'>
-            {eachPar.map((each, index) => (
+        {parArr.map((eachPar, rowIdx) => (
+          <div key={`Row-${rowIdx}`} className='flex'>
+            {eachPar.map((each, colIdx) => (
               <Node 
-                key={`Column-${index}`}
+                key={`Column-${colIdx}`}
                 cell={each}
                 grid={parArr}
                 start={start}
