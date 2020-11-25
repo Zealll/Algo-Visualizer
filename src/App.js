@@ -4,7 +4,8 @@ import React, {useState, useEffect} from 'react';
 import Node from './node/Node.js'
 import Cell from './node/Cell.js'
 
-import {dijkstras} from './algorithms/Dijkstras.js'
+import { dijkstras } from './algorithms/Dijkstras.js'
+import { aStar } from './algorithms/A_Star.js'
 import { array } from 'prop-types';
 
 
@@ -18,10 +19,10 @@ function App() {
   const [end, setEnd] = useState({lon: 13, lat: 40})
  
 
-  useEffect(() => {
-    const arr = []
+  // useEffect(() => {
+  //   const arr = []
     
-  },[])
+  // },[])
 
   for (let j = 0; j < rows; j++) {
     const box = []
@@ -41,9 +42,15 @@ function App() {
   //   console.log(lon, lat)
   //   return [lon, lat]
   // }
+  // parArr[13][30].isWall = true
+  // parArr[14][30].isWall = true
+  // parArr[12][30].isWall = true
+  // parArr[14][20].isWall = true
+  // parArr[14][21].weight = 5
 
   setTimeout(() => {
     dijkstras(parArr, parArr[start.lon][start.lat], parArr[end.lon][end.lat])
+
   }, 1000)
   
 

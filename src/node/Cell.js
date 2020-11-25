@@ -12,6 +12,7 @@ class Cell {
         this.west = this.lat === 0 ? false : true
         this.weight = 0
         this.prevNode = null
+        this.isWall = false
     }
 
     visit() {
@@ -26,9 +27,9 @@ class Cell {
     findNeighbors(grid) {
         const arr = []
         if (this.north) arr.push(grid[this.lon - 1][this.lat])
-        if (this.east) arr.push(grid[this.lon][this.lat + 1])
         if (this.south) arr.push(grid[this.lon + 1][this.lat])
         if (this.west) arr.push(grid[this.lon][this.lat - 1])
+        if (this.east) arr.push(grid[this.lon][this.lat + 1])
 
         return arr.filter(each => !each.visited)
     }
