@@ -10,11 +10,11 @@ export function dijkstras(nodes, startNode, endNode, func) {
     }
 
     function recursion() {
-        if (!unvisitedNodes.length) return
         unvisitedNodes.sort((node1, node2) => node1.distance - node2.distance)
         
         const closestNode = unvisitedNodes.shift()
         if (closestNode.isWall) return recursion()
+        if (closestNode.distance === Infinity) {alert('There is no path to final destination!'); return}
         
         closestNode.visit()
         
