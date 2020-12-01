@@ -11,6 +11,8 @@ class Cell {
         this.south = this.lon === this.maxLon ? false : true
         this.west = this.lat === 0 ? false : true
         this.weight = 0
+        this.h = 0
+        this.f = 0
         this.prevNode = null
         this.isWall = false
     }

@@ -48,7 +48,10 @@ function App() {
   // parArr[14][20].isWall = true
   // parArr[14][21].weight = 5
   for (let i = 0; i < parArr.length; i++) {
-    parArr[i][22].isWall = true
+    if (i > 5) {
+
+      parArr[i][22].isWall = true
+    }
   }
 
   setTimeout(() => {
