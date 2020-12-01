@@ -58,6 +58,7 @@ function App() {
     // dijkstras(parArr, parArr[start.lon][start.lat], parArr[end.lon][end.lat])
     aStar(parArr, parArr[start.lon][start.lat], parArr[end.lon][end.lat])
 
+
   }, 1000)
   
 

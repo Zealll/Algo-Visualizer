@@ -10,19 +10,19 @@ export function aStar(nodes, startNode, endNode) {
 
         closedList.push(currentNode)
 
-        if (currentNode === endNode) return 
+        if (currentNode === endNode) return shortestPath(endNode)
         if (!currentNode) return
         if (currentNode.isWall) return recursion()
 
         currentNode.visit()
         document.getElementById(`Row-${currentNode.lon}-Col-${currentNode.lat}`).className = `${document.getElementById(`Row-${currentNode.lon}-Col-${currentNode.lat}`).className} visited`
 
-        let neighbors = currentNode.findNeighbors(nodes)
+        let neighbors = currentNode.findNeighbors(nodes, 'AStar')
         for (let n of neighbors) {
             if (closedList.includes(n)) continue
         
             //Replace the "currentNode" with "n" and the path will change!!! 
-            let HDistance = ((currentNode.lon - endNode.lon) ** 2) + ((currentNode.lat - endNode.lat) ** 2)
+            let HDistance = ((n.lon - endNode.lon) ** 2) + ((n.lat - endNode.lat) ** 2)
             n.h = currentNode.h + 1
             n.setDistance(n.h + currentNode.weight + HDistance)
 
@@ -37,6 +37,21 @@ export function aStar(nodes, startNode, endNode) {
     }
 
     recursion()
+
+    function shortestPath(endN, shortArr) {
+        const shortest = []
+        let currentNode = endN
+
+        while (currentNode) {
+            shortest.unshift(currentNode)
+            currentNode = currentNode.prevNode
+        }
+        console.log(shortest)
+        for (let node of shortest) {
+            let nodeClass = `Row-${node.lon}-Col-${node.lat}`
+            document.getElementById(nodeClass).className = `${document.getElementById(nodeClass).className} shortest`
+        }
+    }
 }
 
 

@@ -50,26 +50,5 @@ export function dijkstras(nodes, startNode, endNode, func) {
         for (let node of shortest) {
             document.getElementById(`Row-${node.lon}-Col-${node.lat}`).className = `${document.getElementById(`Row-${node.lon}-Col-${node.lat}`).className} shortest`
         }
-        // const shortest = shortArr
-        // let curr = endN
-
-        // if (curr) {
-        //     while (curr) {
-        //         shortest.push(curr)
-
-        //         curr = curr.prevNode
-        //     } 
-
-        //     return shortestPath(curr, shortest)
-
-        // } else if (shortest.length) {     
-        //         document.getElementById(`Row-${shortest[shortest.length - 1].lon}-Col-${shortest[shortest.length - 1].lat}`).className = `${document.getElementById(`Row-${shortest[shortest.length - 1].lon}-Col-${shortest[shortest.length - 1].lat}`).className} shortest`
-                
-        //         shortest.pop()
-                
-        //         setTimeout(() => {
-        //             return shortestPath(curr, shortest)
-        //         }, 2)
-        // }
     }
 }
