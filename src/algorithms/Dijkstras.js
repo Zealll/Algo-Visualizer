@@ -48,7 +48,8 @@ export function dijkstras(nodes, startNode, endNode, func) {
         }
         console.log(shortest)
         for (let node of shortest) {
-            document.getElementById(`Row-${node.lon}-Col-${node.lat}`).className = `${document.getElementById(`Row-${node.lon}-Col-${node.lat}`).className} shortest`
+            let nodeClass = `Row-${node.lon}-Col-${node.lat}`
+            document.getElementById(nodeClass).className = `${document.getElementById(nodeClass).className} shortest`
         }
     }
 }
