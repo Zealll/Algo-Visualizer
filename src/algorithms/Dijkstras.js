@@ -1,20 +1,41 @@
-export function dijkstras(nodes, startNode, endNode) {
+import { shortestPath } from '../helpers/algo_helpers.js'
 
-    const unvisited = new Set()
-
-    for (let i = 0; i < nodes.length; i++) {
-        for (let j of nodes[i]) {
-            unvisited.add(j)
+export function dijkstras(nodes, startNode, endNode, func) {
+    const visitedNodesInOrder = []
+    startNode.setDistance(0)
+    const unvisitedNodes = []
+    for (let i of nodes) {
+        for (let j of i) {
+            unvisitedNodes.push(j)
         }
     }
 
-    // console.log(unvisited.delete(38123))
-    // unvisited.delete(38123)
-    // unvisited.delete(38122)
-    // unvisited.delete(38121)
-
-    // console.log(unvisited)
+    function recursion() {
+        unvisitedNodes.sort((node1, node2) => node1.distance - node2.distance)
+        
+        const closestNode = unvisitedNodes.shift()
+        if (closestNode.isWall) return recursion()
+        if (closestNode.distance === Infinity) {alert('There is no path to final destination!'); return}
+        
+        closestNode.visit()
+        
+        visitedNodesInOrder.push(closestNode)
     
+        if(closestNode.lon === endNode.lon && closestNode.lat === endNode.lat) return shortestPath(endNode, [])
+        
+        document.getElementById(`Row-${closestNode.lon}-Col-${closestNode.lat}`).className = `${document.getElementById(`Row-${closestNode.lon}-Col-${closestNode.lat}`).className} visited`
 
-    return {}
+        const neighbors = closestNode.findNeighbors(nodes)
+    
+        for (let n of neighbors) {
+            n.setDistance(closestNode.distance + 1 + closestNode.weight)
+            n.prevNode = closestNode
+        }
+
+        setTimeout(() => {
+            return recursion()
+        }, 10)
+    }
+
+    recursion()
 }

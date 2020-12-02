@@ -1,43 +1,105 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 // import logo from './logo.svg';
 
 import Node from './node/Node.js'
+import Cell from './node/Cell.js'
 
-import {dijkstras} from './algorithms/Dijkstras.js'
+import Header from './header/Header.js'
+
+// **** Path Finding Algorithms ****
+import { dijkstras } from './algorithms/Dijkstras.js'
+import { aStar } from './algorithms/A_Star.js'
+
+import { depthFirst } from './maze/depthFirst'
+
 
 function App() {
   const size = window.screen
-  let parArr = []
+  const [parArr, setParArr] = useState([])
+  // const [parArr, setParArr] = useState([])
+  let rows = Math.floor((size.availHeight / 100 * 70) / 20)
+  let columns = Math.floor((size.availWidth / 100 * 90) / 20)
+  const [start, setStart] = useState({lon: 13, lat: 20})
+  const [end, setEnd] = useState({lon: 13, lat: 40})
+  const [clicked, setClicked] = useState(false)
  
-  for (let j = 1; j <= (size.availHeight / 100 * 70) / 20; j++) {
-    const box = []
-
-    for (let i = 1; i <= (size.availWidth / 100 * 90) / 20; i++) {
-      box.push(Number(`${j}${i}`))
+  useEffect(() => {
+    // parArr = []
+    for (let j = 0; j < rows; j++) {
+      // console.log('ran')
+      const box = []
+  
+      for (let i = 0; i < columns; i++) {
+        const cell = new Cell(j, i, rows - 1, columns - 1)
+  
+        box.push(cell)
+      }
+      // console.log(Math.floor((size.availHeight / 100 * 70) / 20))
+      
+      setParArr(parArr => [...parArr, box])
     }
-
-    parArr.push(box)
-  }
-
-  dijkstras(parArr)
-
-  // const maap = new Map()
-  // console.log(parArr.maap())
-  
-
-  
+    
+  }, [])
 
   // console.log(parArr)
+
+  
+  // console.log(parArr)
+  
+
+  // const toggle = (lon, lat) => {
+  //   console.log(lon, lat)
+  //   return [lon, lat]
+  // }
+  // parArr[13][30].isWall = true
+  // parArr[14][30].isWall = true
+  // parArr[12][30].isWall = true
+  // parArr[14][20].isWall = true
+  // parArr[14][21].weight = 5
+  // for (let i = 0; i < parArr.length; i++) {
+  //   if (i > 5) {
+
+  //     parArr[i][22].isWall = true
+  //   }
+  // }
+
+  const algoRunner = name => {
+    if (name === 'astar') aStar(parArr, parArr[start.lon][start.lat], parArr[end.lon][end.lat])
+    if (name === 'dijkstra') dijkstras(parArr, parArr[start.lon][start.lat], parArr[end.lon][end.lat])
+  }
+
+  const startHandler = (lon, lat) => {
+    if (clicked) {
+      document.getElementById(`Row-${lon}-Col-${lat}`).className = `${document.getElementById(`Row-${lon}-Col-${lat}`).className} visited start`
+    }
+    
+  }
+
+  
+
+  // setTimeout(() => {
+  //   // dijkstras(parArr, parArr[start.lon][start.lat], parArr[end.lon][end.lat])
+  //   // aStar(parArr, parArr[start.lon][start.lat], parArr[end.lon][end.lat])
+  //   depthFirst(parArr)
+
+  // }, 1000)
+  console.log('hello')
   return (
     <div className="App">
+      
+        <Header algoRunner={algoRunner}/>
       <header className="App-header">
-        {parArr.map((eachPar, index) => (
-          <div className='flex'>
-            {eachPar.map(each => (
+        {parArr.map((eachPar, rowIdx) => (
+          <div key={`Row-${rowIdx}`} className='flex'>
+            {eachPar.map((each, colIdx) => (
               <Node 
-                lon={index + 1}
-                lat={each}
-                coor={each}
+                key={`Column-${colIdx}`}
+                cell={each}
+                grid={parArr}
+                start={start}
+                end={end}
+                startHandler={startHandler}
+                setClicked={setClicked}
               />
             ))}
           </div>
@@ -49,5 +111,7 @@ function App() {
     </div>
   );
 }
-
+// https://dmitripavlutin.com/use-react-memo-wisely/
+// https://staleclosures.dev/preventing-list-rerenders/
+// https://dev.to/maikomiyazaki/completed-javascript-data-structure-course-and-here-is-what-i-learned-about-graph-dijkstra-algorithm-57n8
 export default App;
