@@ -1,3 +1,5 @@
+import { shortestPath } from '../helpers/algo_helpers.js'
+
 export function aStar(nodes, startNode, endNode) {
     const openList = []
     const closedList = []
@@ -15,7 +17,7 @@ export function aStar(nodes, startNode, endNode) {
         if (currentNode.isWall) return recursion()
 
         currentNode.visit()
-        document.getElementById(`Row-${currentNode.lon}-Col-${currentNode.lat}`).className = `${document.getElementById(`Row-${currentNode.lon}-Col-${currentNode.lat}`).className} visited`
+        
 
         let neighbors = currentNode.findNeighbors(nodes, 'AStar')
         for (let n of neighbors) {
@@ -37,21 +39,6 @@ export function aStar(nodes, startNode, endNode) {
     }
 
     recursion()
-
-    function shortestPath(endN, shortArr) {
-        const shortest = []
-        let currentNode = endN
-
-        while (currentNode) {
-            shortest.unshift(currentNode)
-            currentNode = currentNode.prevNode
-        }
-        console.log(shortest)
-        for (let node of shortest) {
-            let nodeClass = `Row-${node.lon}-Col-${node.lat}`
-            document.getElementById(nodeClass).className = `${document.getElementById(nodeClass).className} shortest`
-        }
-    }
 }
 
 

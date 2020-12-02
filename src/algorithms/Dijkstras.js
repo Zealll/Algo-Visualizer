@@ -1,4 +1,5 @@
-// import React, {useState} from 'react'
+import { shortestPath } from '../helpers/algo_helpers.js'
+
 export function dijkstras(nodes, startNode, endNode, func) {
     const visitedNodesInOrder = []
     startNode.setDistance(0)
@@ -37,19 +38,4 @@ export function dijkstras(nodes, startNode, endNode, func) {
     }
 
     recursion()
-
-    function shortestPath(endN, shortArr) {
-        const shortest = []
-        let currentNode = endN
-
-        while (currentNode) {
-            shortest.unshift(currentNode)
-            currentNode = currentNode.prevNode
-        }
-        console.log(shortest)
-        for (let node of shortest) {
-            let nodeClass = `Row-${node.lon}-Col-${node.lat}`
-            document.getElementById(nodeClass).className = `${document.getElementById(nodeClass).className} shortest`
-        }
-    }
 }
