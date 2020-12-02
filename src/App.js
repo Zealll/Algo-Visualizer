@@ -16,7 +16,6 @@ import { depthFirst } from './maze/depthFirst'
 function App() {
   const size = window.screen
   const [parArr, setParArr] = useState([])
-  // const [parArr, setParArr] = useState([])
   let rows = Math.floor((size.availHeight / 100 * 70) / 20)
   let columns = Math.floor((size.availWidth / 100 * 90) / 20)
   const [start, setStart] = useState({lon: 13, lat: 20})
@@ -26,7 +25,6 @@ function App() {
   useEffect(() => {
     // parArr = []
     for (let j = 0; j < rows; j++) {
-      // console.log('ran')
       const box = []
   
       for (let i = 0; i < columns; i++) {
@@ -40,17 +38,6 @@ function App() {
     }
     
   }, [])
-
-  // console.log(parArr)
-
-  
-  // console.log(parArr)
-  
-
-  // const toggle = (lon, lat) => {
-  //   console.log(lon, lat)
-  //   return [lon, lat]
-  // }
   // parArr[13][30].isWall = true
   // parArr[14][30].isWall = true
   // parArr[12][30].isWall = true
@@ -68,20 +55,23 @@ function App() {
     if (name === 'dijkstra') dijkstras(parArr, parArr[start.lon][start.lat], parArr[end.lon][end.lat])
   }
 
-  const startHandler = (lon, lat) => {
+  const startHandler = (e, lon, lat) => {
+    e.preventDefault();
     if (clicked) {
-      console.log('click', lon,lat)
-      document.getElementById(`Row-${lon}-Col-${lat}`).className = `${document.getElementById(`Row-${lon}-Col-${lat}`).className} visited start`
+      if(lon !== end.lon || lat !== end.lat) {
+        document.getElementById(`Row-${lon}-Col-${lat}`).className = `${document.getElementById(`Row-${lon}-Col-${lat}`).className} visited start`
+      }  
     }
   }
 
-  const test = (lon, lat) => {
+  const test = (e, lon, lat) => {
+    e.preventDefault();
     if (clicked) {
-      console.log(lon, lat)
-      document.getElementById(`Row-${lon}-Col-${lat}`).className = 'square'
+      if(lon !== end.lon || lat !== end.lat) {
+        document.getElementById(`Row-${lon}-Col-${lat}`).className = 'square'
+      }
     }
 }
-
   
 
   // setTimeout(() => {
@@ -90,7 +80,7 @@ function App() {
   //   depthFirst(parArr)
 
   // }, 1000)
-  console.log('hello')
+
   return (
     <div className="App">
       
@@ -109,6 +99,7 @@ function App() {
                 setClicked={setClicked}
                 test={test}
                 setStart={setStart}
+                clicked={clicked}
               />
             ))}
           </div>
