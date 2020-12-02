@@ -55,17 +55,27 @@ function App() {
     if (name === 'dijkstra') dijkstras(parArr, parArr[start.lon][start.lat], parArr[end.lon][end.lat])
   }
 
+  let prevLocation = start
   const startHandler = (e, lon, lat) => {
     e.preventDefault();
+
     if (clicked) {
       if(lon !== end.lon || lat !== end.lat) {
+
+        if (prevLocation) document.getElementById(`Row-${prevLocation.lon}-Col-${prevLocation.lat}`).className = `square`
+        
         document.getElementById(`Row-${lon}-Col-${lat}`).className = `${document.getElementById(`Row-${lon}-Col-${lat}`).className} visited start`
-      }  
+        prevLocation = {lon, lat}
+      } else {
+        document.getElementById(`Row-${prevLocation.lon}-Col-${prevLocation.lat}`).className = `${document.getElementById(`Row-${prevLocation.lon}-Col-${prevLocation.lat}`).className} visited start`
+        setStart(prevLocation)
+      }
     }
   }
 
   const test = (e, lon, lat) => {
     e.preventDefault();
+    
     if (clicked) {
       if(lon !== end.lon || lat !== end.lat) {
         document.getElementById(`Row-${lon}-Col-${lat}`).className = 'square'

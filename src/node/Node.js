@@ -8,19 +8,25 @@ const Node = props => {
         // setVisited(props.cell.visit())
     }
 
-    const startNodeClickHandler = (e) => {
+    const startNodeClickHandler = e => {
         e.preventDefault();
         if (props.cell.lon === props.start.lon && props.cell.lat === props.start.lat){
             props.setClicked(true)
-            console.log('RAAAAAN')
+        }
+    }
+    const locationSetter = e => {
+        e.preventDefault()
+        if (props.end.lon !== props.cell.lon || props.end.lat !== props.cell.lat){
+            props.setStart({lon: props.cell.lon, lat: props.cell.lat})
         }
     }
    
 
     return (
         <div 
+          draggable={false}
           onMouseDown={(e) => startNodeClickHandler(e)} 
-          onMouseUp={() => {props.setClicked(false); props.clicked && props.setStart({lon: props.cell.lon, lat: props.cell.lat})}} 
+          onMouseUp={(e) => {props.setClicked(false); props.clicked && locationSetter(e)}} 
           onMouseEnter={(e) => props.startHandler(e, props.cell.lon, props.cell.lat)} 
           onMouseLeave={(e) => props.test(e, props.cell.lon, props.cell.lat)}
           onClick={() => {clickHandler()}} 
