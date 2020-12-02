@@ -70,10 +70,17 @@ function App() {
 
   const startHandler = (lon, lat) => {
     if (clicked) {
+      console.log('click', lon,lat)
       document.getElementById(`Row-${lon}-Col-${lat}`).className = `${document.getElementById(`Row-${lon}-Col-${lat}`).className} visited start`
     }
-    
   }
+
+  const test = (lon, lat) => {
+    if (clicked) {
+      console.log(lon, lat)
+      document.getElementById(`Row-${lon}-Col-${lat}`).className = 'square'
+    }
+}
 
   
 
@@ -100,6 +107,8 @@ function App() {
                 end={end}
                 startHandler={startHandler}
                 setClicked={setClicked}
+                test={test}
+                setStart={setStart}
               />
             ))}
           </div>

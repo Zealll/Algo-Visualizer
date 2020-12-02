@@ -13,13 +13,16 @@ const Node = props => {
 
     // console.log(lat)
     // console.log(props.grid)
-    const clickHandler = () => {
-        setVisited(props.cell.visit())
+    // const clickHandler = () => {
+    //     // setVisited(props.cell.visit())
+    //     console.log('INside',props.cell.lon, props.cell.lat)
+    // }
+
+    const startNodeClickHandler = () => {
+
     }
 
-    // const startNodeClickHandler = () => {
-
-    // }
+    
 
     // const stateUpdateF = (lon, lat) => {
     //     if (lon === props.cell.lon && lat === props.cell.lat) {
@@ -32,9 +35,10 @@ const Node = props => {
     // console.log(start, lat, lon)
     return (
         <div 
-        //   onMouseDown={() => props.setClicked(true)} 
-        //   onMouseUp={() => props.setClicked(false)} 
-        //   onMouseEnter={() => props.startHandler(props.cell.lon, props.cell.lat)} 
+          onMouseDown={() => props.setClicked(true)} 
+          onMouseUp={() => {props.setClicked(false);props.setStart({lon: props.cell.lon, lat: props.cell.lat})}} 
+          onMouseEnter={() => props.startHandler(props.cell.lon, props.cell.lat)} 
+          onMouseLeave={() => props.test(props.cell.lon, props.cell.lat)}
         //   onClick={() => {clickHandler()}} 
 
           id={`Row-${props.cell.lon}-Col-${props.cell.lat}`} 
