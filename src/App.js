@@ -22,6 +22,7 @@ function App() {
   const [end, setEnd] = useState({lon: 13, lat: 40})
   const [clicked, setClicked] = useState(false)
   const [destinationClicked, setDestinationClicked] = useState(false)
+  const [normalNodeClicked, setNormalNodeClicked] = useState(false) 
  
   useEffect(() => {
     // parArr = []
@@ -108,7 +109,7 @@ function App() {
   return (
     <div className="App">
       
-        <Header algoRunner={algoRunner}/>
+      <Header algoRunner={algoRunner}/>
       <header className="App-header">
         {parArr.map((eachPar, rowIdx) => (
           <div key={`Row-${rowIdx}`} className='flex'>
@@ -127,6 +128,8 @@ function App() {
                 setClicked={setClicked}
                 destinationClicked={destinationClicked}
                 setDestinationClicked={setDestinationClicked}
+                normalNodeClicked={normalNodeClicked}
+                setNormalNodeClicked={setNormalNodeClicked}
               />
             ))}
           </div>

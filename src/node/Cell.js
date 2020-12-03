@@ -32,12 +32,12 @@ class Cell {
         if (this.south) arr.push(grid[this.lon + 1][this.lat])
         if (this.west) arr.push(grid[this.lon][this.lat - 1])
         if (this.east) arr.push(grid[this.lon][this.lat + 1])
-        if (algo === 'AStar'){
-            if (this.north && this.east) arr.push(grid[this.lon - 1][this.lat + 1])
-            if (this.south && this.east) arr.push(grid[this.lon + 1][this.lat + 1])
-            if (this.south && this.west) arr.push(grid[this.lon + 1][this.lat - 1])
-            if (this.north && this.west) arr.push(grid[this.lon - 1][this.lat - 1])
-        }
+        // if (algo === 'AStar'){
+        //     if (this.north && this.east) arr.push(grid[this.lon - 1][this.lat + 1])
+        //     if (this.south && this.east) arr.push(grid[this.lon + 1][this.lat + 1])
+        //     if (this.south && this.west) arr.push(grid[this.lon + 1][this.lat - 1])
+        //     if (this.north && this.west) arr.push(grid[this.lon - 1][this.lat - 1])
+        // }
 
         return arr.filter(each => !each.visited)
     }
