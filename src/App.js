@@ -21,6 +21,7 @@ function App() {
   const [start, setStart] = useState({lon: 13, lat: 20})
   const [end, setEnd] = useState({lon: 13, lat: 40})
   const [clicked, setClicked] = useState(false)
+  const [destinationClicked, setDestinationClicked] = useState(false)
  
   useEffect(() => {
     // parArr = []
@@ -55,34 +56,47 @@ function App() {
     if (name === 'dijkstra') dijkstras(parArr, parArr[start.lon][start.lat], parArr[end.lon][end.lat])
   }
 
-  let prevLocation = start
-  const startHandler = (e, lon, lat) => {
+  let prevStartLocation = start
+  let prevEndLocation = end
+  const nodeDragHandler = (e, lon, lat) => {
     e.preventDefault();
 
     if (clicked) {
       if(lon !== end.lon || lat !== end.lat) {
-
-        if (prevLocation) document.getElementById(`Row-${prevLocation.lon}-Col-${prevLocation.lat}`).className = `square`
+        document.getElementById(`Row-${prevStartLocation.lon}-Col-${prevStartLocation.lat}`).className = `square`
         
         document.getElementById(`Row-${lon}-Col-${lat}`).className = `${document.getElementById(`Row-${lon}-Col-${lat}`).className} visited start`
-        prevLocation = {lon, lat}
+        prevStartLocation = {lon, lat}
       } else {
-        document.getElementById(`Row-${prevLocation.lon}-Col-${prevLocation.lat}`).className = `${document.getElementById(`Row-${prevLocation.lon}-Col-${prevLocation.lat}`).className} visited start`
-        setStart(prevLocation)
+        document.getElementById(`Row-${prevStartLocation.lon}-Col-${prevStartLocation.lat}`).className = `${document.getElementById(`Row-${prevStartLocation.lon}-Col-${prevStartLocation.lat}`).className} visited start`
+        setStart(prevStartLocation)
+      }
+    } else if (destinationClicked) {
+      if (lon !== start.lon || lat !== start.lat) {
+        document.getElementById(`Row-${prevEndLocation.lon}-Col-${prevEndLocation.lat}`).className = `square`
+
+        document.getElementById(`Row-${lon}-Col-${lat}`).className = `${document.getElementById(`Row-${lon}-Col-${lat}`).className} visited end`
+        prevEndLocation = {lon, lat}
+      } else {
+        document.getElementById(`Row-${prevEndLocation.lon}-Col-${prevEndLocation.lat}`).className = `${document.getElementById(`Row-${prevEndLocation.lon}-Col-${prevEndLocation.lat}`).className} visited end`
+        setEnd(prevEndLocation)
       }
     }
   }
 
-  const test = (e, lon, lat) => {
+  const prevNodeDragHandler = (e, lon, lat) => {
     e.preventDefault();
     
     if (clicked) {
       if(lon !== end.lon || lat !== end.lat) {
         document.getElementById(`Row-${lon}-Col-${lat}`).className = 'square'
       }
+    } else if (destinationClicked) {
+      if(lon !== start.lon || lat !== start.lat) {
+        document.getElementById(`Row-${lon}-Col-${lat}`).className = 'square'
+      }
     }
 }
-  
 
   // setTimeout(() => {
   //   // dijkstras(parArr, parArr[start.lon][start.lat], parArr[end.lon][end.lat])
@@ -90,7 +104,7 @@ function App() {
   //   depthFirst(parArr)
 
   // }, 1000)
-
+  // console.log(destinationClicked)
   return (
     <div className="App">
       
@@ -105,11 +119,14 @@ function App() {
                 grid={parArr}
                 start={start}
                 end={end}
-                startHandler={startHandler}
-                setClicked={setClicked}
-                test={test}
+                nodeDragHandler={nodeDragHandler}
+                prevNodeDragHandler={prevNodeDragHandler}
                 setStart={setStart}
+                setEnd={setEnd}
                 clicked={clicked}
+                setClicked={setClicked}
+                destinationClicked={destinationClicked}
+                setDestinationClicked={setDestinationClicked}
               />
             ))}
           </div>
