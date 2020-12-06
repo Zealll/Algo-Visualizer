@@ -16,17 +16,17 @@ import { depthFirst } from './maze/depthFirst'
 function App() {
   const size = window.screen
   const [parArr, setParArr] = useState([])
-  // const [parArr, setParArr] = useState([])
   let rows = Math.floor((size.availHeight / 100 * 70) / 20)
   let columns = Math.floor((size.availWidth / 100 * 90) / 20)
   const [start, setStart] = useState({lon: 13, lat: 20})
   const [end, setEnd] = useState({lon: 13, lat: 40})
   const [clicked, setClicked] = useState(false)
+  const [destinationClicked, setDestinationClicked] = useState(false)
+  const [normalNodeClicked, setNormalNodeClicked] = useState(false) 
  
   useEffect(() => {
     // parArr = []
     for (let j = 0; j < rows; j++) {
-      // console.log('ran')
       const box = []
   
       for (let i = 0; i < columns; i++) {
@@ -40,17 +40,6 @@ function App() {
     }
     
   }, [])
-
-  // console.log(parArr)
-
-  
-  // console.log(parArr)
-  
-
-  // const toggle = (lon, lat) => {
-  //   console.log(lon, lat)
-  //   return [lon, lat]
-  // }
   // parArr[13][30].isWall = true
   // parArr[14][30].isWall = true
   // parArr[12][30].isWall = true
@@ -68,14 +57,47 @@ function App() {
     if (name === 'dijkstra') dijkstras(parArr, parArr[start.lon][start.lat], parArr[end.lon][end.lat])
   }
 
-  const startHandler = (lon, lat) => {
+  let prevStartLocation = start
+  let prevEndLocation = end
+  const nodeDragHandler = (e, lon, lat) => {
+    e.preventDefault();
+
     if (clicked) {
-      document.getElementById(`Row-${lon}-Col-${lat}`).className = `${document.getElementById(`Row-${lon}-Col-${lat}`).className} visited start`
+      if(lon !== end.lon || lat !== end.lat) {
+        document.getElementById(`Row-${prevStartLocation.lon}-Col-${prevStartLocation.lat}`).className = `square`
+        
+        document.getElementById(`Row-${lon}-Col-${lat}`).className = `${document.getElementById(`Row-${lon}-Col-${lat}`).className} visited start`
+        prevStartLocation = {lon, lat}
+      } else {
+        document.getElementById(`Row-${prevStartLocation.lon}-Col-${prevStartLocation.lat}`).className = `${document.getElementById(`Row-${prevStartLocation.lon}-Col-${prevStartLocation.lat}`).className} visited start`
+        setStart(prevStartLocation)
+      }
+    } else if (destinationClicked) {
+      if (lon !== start.lon || lat !== start.lat) {
+        document.getElementById(`Row-${prevEndLocation.lon}-Col-${prevEndLocation.lat}`).className = `square`
+
+        document.getElementById(`Row-${lon}-Col-${lat}`).className = `${document.getElementById(`Row-${lon}-Col-${lat}`).className} visited end`
+        prevEndLocation = {lon, lat}
+      } else {
+        document.getElementById(`Row-${prevEndLocation.lon}-Col-${prevEndLocation.lat}`).className = `${document.getElementById(`Row-${prevEndLocation.lon}-Col-${prevEndLocation.lat}`).className} visited end`
+        setEnd(prevEndLocation)
+      }
     }
-    
   }
 
-  
+  const prevNodeDragHandler = (e, lon, lat) => {
+    e.preventDefault();
+    
+    if (clicked) {
+      if(lon !== end.lon || lat !== end.lat) {
+        document.getElementById(`Row-${lon}-Col-${lat}`).className = 'square'
+      }
+    } else if (destinationClicked) {
+      if(lon !== start.lon || lat !== start.lat) {
+        document.getElementById(`Row-${lon}-Col-${lat}`).className = 'square'
+      }
+    }
+}
 
   // setTimeout(() => {
   //   // dijkstras(parArr, parArr[start.lon][start.lat], parArr[end.lon][end.lat])
@@ -83,11 +105,11 @@ function App() {
   //   depthFirst(parArr)
 
   // }, 1000)
-  console.log('hello')
+  // console.log(destinationClicked)
   return (
     <div className="App">
       
-        <Header algoRunner={algoRunner}/>
+      <Header algoRunner={algoRunner}/>
       <header className="App-header">
         {parArr.map((eachPar, rowIdx) => (
           <div key={`Row-${rowIdx}`} className='flex'>
@@ -98,8 +120,16 @@ function App() {
                 grid={parArr}
                 start={start}
                 end={end}
-                startHandler={startHandler}
+                nodeDragHandler={nodeDragHandler}
+                prevNodeDragHandler={prevNodeDragHandler}
+                setStart={setStart}
+                setEnd={setEnd}
+                clicked={clicked}
                 setClicked={setClicked}
+                destinationClicked={destinationClicked}
+                setDestinationClicked={setDestinationClicked}
+                normalNodeClicked={normalNodeClicked}
+                setNormalNodeClicked={setNormalNodeClicked}
               />
             ))}
           </div>

@@ -7,8 +7,24 @@ export function shortestPath(endN) {
         currentNode = currentNode.prevNode
     }
 
-    for (let node of shortest) {
-        let nodeClass = `Row-${node.lon}-Col-${node.lat}`
-        document.getElementById(nodeClass).className = `${document.getElementById(nodeClass).className} shortest`
+    let count = 0
+
+    function animatePath() {
+        if (count < shortest.length) {
+            let nodeClass = `Row-${shortest[count].lon}-Col-${shortest[count].lat}`
+            document.getElementById(nodeClass).className = `${document.getElementById(nodeClass).className} shortest`
+            count += 1
+            setTimeout(() => {
+                return animatePath()
+            }, 20)
+            
+        }  
     }
+
+    animatePath()
+
+    // for (let node of shortest) {
+    //     let nodeClass = `Row-${node.lon}-Col-${node.lat}`
+    //     document.getElementById(nodeClass).className = `${document.getElementById(nodeClass).className} shortest`
+    // }
 }

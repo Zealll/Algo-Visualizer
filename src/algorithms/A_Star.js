@@ -18,7 +18,7 @@ export function aStar(nodes, startNode, endNode) {
 
         currentNode.visit()
         
-
+        document.getElementById(`Row-${currentNode.lon}-Col-${currentNode.lat}`).className = `${document.getElementById(`Row-${currentNode.lon}-Col-${currentNode.lat}`).className} visited`
         let neighbors = currentNode.findNeighbors(nodes, 'AStar')
         for (let n of neighbors) {
             if (closedList.includes(n)) continue

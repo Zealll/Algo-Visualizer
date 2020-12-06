@@ -7,7 +7,7 @@ const Header = props => {
         setName(e.target.value)
     }
 
-    console.log('header')
+    // console.log('header')
 
     return (
         <div>
