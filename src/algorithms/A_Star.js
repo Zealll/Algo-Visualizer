@@ -22,9 +22,9 @@ export function aStar(nodes, startNode, endNode) {
         let neighbors = currentNode.findNeighbors(nodes, 'AStar')
         for (let n of neighbors) {
             if (closedList.includes(n)) continue
-        
+            Number(Math.sqrt(2).toFixed(2))
             //Replace the "currentNode" with "n" and the path will change!!! 
-            let HDistance = ((n.lon - endNode.lon) ** 2) + ((n.lat - endNode.lat) ** 2)
+            let HDistance = Math.sqrt(((n.lon - endNode.lon) ** 2) + ((n.lat - endNode.lat) ** 2))
             n.h = currentNode.h + 1
             n.setDistance(n.h + currentNode.weight + HDistance)
 
