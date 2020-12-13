@@ -13,7 +13,7 @@ export function aStar(nodes, startNode, endNode) {
         closedList.push(currentNode)
 
         if (currentNode === endNode) return shortestPath(endNode)
-        if (!currentNode) return
+        if (!currentNode) {alert('There is no path to final destination!'); return}
         if (currentNode.isWall) return recursion()
 
         currentNode.visit()
