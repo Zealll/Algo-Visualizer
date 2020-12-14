@@ -1,6 +1,6 @@
 import { shortestPath } from '../helpers/algo_helpers.js'
 
-export function dijkstras(nodes, startNode, endNode, func) {
+export function dijkstras(nodes, startNode, endNode, isWeighted, algo) {
     const visitedNodesInOrder = []
     startNode.setDistance(0)
     const unvisitedNodes = []
@@ -10,12 +10,20 @@ export function dijkstras(nodes, startNode, endNode, func) {
         }
     }
 
+    const depthStack = [startNode]
+
     function recursion() {
-        unvisitedNodes.sort((node1, node2) => node1.distance - node2.distance)
+        let closestNode
         
-        const closestNode = unvisitedNodes.shift()
-        if (closestNode.isWall) return recursion()
-        if (closestNode.distance === Infinity) {alert('There is no path to final destination!'); return}
+        if (algo === 'depth_first') {
+            closestNode = depthStack.pop()
+        } else {
+            unvisitedNodes.sort((node1, node2) => node1.distance - node2.distance)
+            closestNode = unvisitedNodes.shift()
+        }
+        console.log(depthStack, closestNode)
+        if (!closestNode || closestNode.distance === Infinity) {alert('There is no path to final destination!'); return}
+        if (closestNode.isWall || closestNode.visited) return recursion()
         
         closestNode.visit()
         
@@ -28,8 +36,16 @@ export function dijkstras(nodes, startNode, endNode, func) {
         const neighbors = closestNode.findNeighbors(nodes)
     
         for (let n of neighbors) {
-            n.setDistance(closestNode.distance + 1 + closestNode.weight)
+            if (isWeighted) {
+                n.setDistance(closestNode.distance + 1 + closestNode.weight)
+            } else {
+                n.setDistance(closestNode.distance + 1)
+            }
+
             n.prevNode = closestNode
+            if (algo === 'depth_first') {
+                if (!visitedNodesInOrder.includes(n)) depthStack.push(n)
+            }
         }
 
         setTimeout(() => {
