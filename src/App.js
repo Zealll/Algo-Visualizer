@@ -9,6 +9,7 @@ import Header from './header/Header.js'
 // **** Path Finding Algorithms ****
 import { dijkstras } from './algorithms/Dijkstras.js'
 import { aStar } from './algorithms/A_Star.js'
+import { bi_aStar } from './algorithms/Bidirectional_A_Star'
 
 function App() {
   const size = window.screen
@@ -42,6 +43,7 @@ function App() {
     if (name === 'dijkstra') dijkstras(parArr, parArr[start.lon][start.lat], parArr[end.lon][end.lat], true, 'dijkstra')
     if (name === 'breadth_first') dijkstras(parArr, parArr[start.lon][start.lat], parArr[end.lon][end.lat], false, 'breadth_first')
     if (name === 'depth_first') dijkstras(parArr, parArr[start.lon][start.lat], parArr[end.lon][end.lat], false, 'depth_first')
+    if (name === 'bi_astar') bi_aStar(parArr, parArr[start.lon][start.lat], parArr[end.lon][end.lat])
   }
 
   let prevStartLocation = start
