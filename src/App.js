@@ -10,9 +10,6 @@ import Header from './header/Header.js'
 import { dijkstras } from './algorithms/Dijkstras.js'
 import { aStar } from './algorithms/A_Star.js'
 
-import { depthFirst } from './maze/depthFirst'
-
-
 function App() {
   const size = window.screen
   const [parArr, setParArr] = useState([])
@@ -34,27 +31,17 @@ function App() {
   
         box.push(cell)
       }
-      // console.log(Math.floor((size.availHeight / 100 * 70) / 20))
       
       setParArr(parArr => [...parArr, box])
     }
     
   }, [])
-  // parArr[13][30].isWall = true
-  // parArr[14][30].isWall = true
-  // parArr[12][30].isWall = true
-  // parArr[14][20].isWall = true
-  // parArr[14][21].weight = 5
-  // for (let i = 0; i < parArr.length; i++) {
-  //   if (i > 5) {
-
-  //     parArr[i][22].isWall = true
-  //   }
-  // }
 
   const algoRunner = name => {
     if (name === 'astar') aStar(parArr, parArr[start.lon][start.lat], parArr[end.lon][end.lat])
-    if (name === 'dijkstra') dijkstras(parArr, parArr[start.lon][start.lat], parArr[end.lon][end.lat])
+    if (name === 'dijkstra') dijkstras(parArr, parArr[start.lon][start.lat], parArr[end.lon][end.lat], true, 'dijkstra')
+    if (name === 'breadth_first') dijkstras(parArr, parArr[start.lon][start.lat], parArr[end.lon][end.lat], false, 'breadth_first')
+    if (name === 'depth_first') dijkstras(parArr, parArr[start.lon][start.lat], parArr[end.lon][end.lat], false, 'depth_first')
   }
 
   let prevStartLocation = start

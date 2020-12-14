@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './styles/base.scss';
 import App from './App';
 // import * as serviceWorker from './serviceWorker';
-
+// console.log = console.warn = console.error = console.assert = () => {};
 ReactDOM.render(
     <App />,
   document.getElementById('root')
