@@ -8,8 +8,8 @@ export function bi_aStar(nodes, startNode, endNode) {
     openList.push(startNode)
 
 
-    let endOpenList = []
-    let endClosedList = []
+    const endOpenList = []
+    const endClosedList = []
     endNode.setDistance(0)
     endOpenList.push(endNode)
 
@@ -22,6 +22,8 @@ export function bi_aStar(nodes, startNode, endNode) {
 
         closedList.push(currentNode)
         endClosedList.push(currentEndNode)
+
+        if (currentNode.isWall && currentEndNode.isWall) return recursion()
 
         if (currentEndNode === currentNode) {
 
@@ -58,39 +60,52 @@ export function bi_aStar(nodes, startNode, endNode) {
             return shortestPath(endNode)
         }
         if (!currentNode) {alert('There is no path to final destination!'); return}
-        if (currentNode.isWall) return recursion()
 
-        currentNode.visit()
-        endNode.visit()
-        document.getElementById(`Row-${currentNode.lon}-Col-${currentNode.lat}`).className = `${document.getElementById(`Row-${currentNode.lon}-Col-${currentNode.lat}`).className} visited`
-        document.getElementById(`Row-${currentEndNode.lon}-Col-${currentEndNode.lat}`).className = `${document.getElementById(`Row-${currentEndNode.lon}-Col-${currentEndNode.lat}`).className} visited`
-        let neighbors = currentNode.findNeighbors(nodes, 'AStar')
-        let endNeighbors = currentEndNode.findNeighbors(nodes)
-        for (let n of neighbors) {
-            if (closedList.includes(n)) continue
-
-            //Replace the "currentNode" with "n" and the path will change!!! 
-            let HDistance = Math.sqrt(((n.lon - endNode.lon) ** 2) + ((n.lat - endNode.lat) ** 2))
-            n.h = currentNode.h + 1
-            n.setDistance(n.h + currentNode.weight + HDistance)
-
-            n.prevNode = currentNode
-
-            if (!openList.includes(n)) openList.push(n)
+        if (!currentNode.isWall){
+            currentNode.visit()
+            document.getElementById(`Row-${currentNode.lon}-Col-${currentNode.lat}`).className = `${document.getElementById(`Row-${currentNode.lon}-Col-${currentNode.lat}`).className} visited`
+            let neighbors = currentNode.findNeighbors(nodes, 'AStar')
+            for (let n of neighbors) {
+                if (closedList.includes(n)) continue
+    
+                //Replace the "currentNode" with "n" and the path will change!!! 
+                let HDistance = Math.sqrt(((n.lon - endNode.lon) ** 2) + ((n.lat - endNode.lat) ** 2))
+                n.h = currentNode.h + 1
+                n.setDistance(n.h + currentNode.weight + HDistance)
+    
+                n.prevNode = currentNode
+    
+                if (!openList.includes(n)) openList.push(n)
+            }
         }
 
-        for (let n of endNeighbors) {
-            if (endClosedList.includes(n)) continue
+        if (!currentEndNode.isWall) {
+            endNode.visit()
+        
+            document.getElementById(`Row-${currentEndNode.lon}-Col-${currentEndNode.lat}`).className = `${document.getElementById(`Row-${currentEndNode.lon}-Col-${currentEndNode.lat}`).className} visited`
+        
+            let endNeighbors = currentEndNode.findNeighbors(nodes)
+        
 
-            //Replace the "currentNode" with "n" and the path will change!!! 
-            let HDistance = Math.sqrt(((n.lon - startNode.lon) ** 2) + ((n.lat - startNode.lat) ** 2))
-            n.h = currentNode.h + 1
-            n.setDistance(n.h + currentEndNode.weight + HDistance)
+            for (let n of endNeighbors) {
+                if (endClosedList.includes(n)) continue
 
-            n.prevNode = currentEndNode
+                //Replace the "currentNode" with "n" and the path will change!!! 
+                let HDistance = Math.sqrt(((n.lon - startNode.lon) ** 2) + ((n.lat - startNode.lat) ** 2))
+                n.h = currentNode.h + 1
+                
+                n.setDistance(n.h + currentEndNode.weight + HDistance)
 
-            if (!endOpenList.includes(n)) endOpenList.push(n)
+                n.prevNode = currentEndNode
+
+                if (!endOpenList.includes(n)) endOpenList.push(n)
+            }
         }
+        
+        
+
+        
+        
 
         setTimeout(() => {
             return recursion()
