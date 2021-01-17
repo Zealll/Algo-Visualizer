@@ -21,9 +21,16 @@ function App() {
   const [clicked, setClicked] = useState(false)
   const [destinationClicked, setDestinationClicked] = useState(false)
   const [normalNodeClicked, setNormalNodeClicked] = useState(false) 
- 
+  const [weight, setWeight] = useState(false)
+  const weightHandler = (e, action) => {
+    // console.log(e.type)
+    if (e.key === 'w' && e.type === 'keydown'){
+      setWeight(true)
+    } else {
+      setWeight(false)
+    }
+  }
   useEffect(() => {
-    // parArr = []
     for (let j = 0; j < rows; j++) {
       const box = []
   
@@ -35,6 +42,13 @@ function App() {
       
       setParArr(parArr => [...parArr, box])
     }
+
+    window.addEventListener('keydown', (e) => weightHandler(e, 'down'))
+    window.addEventListener('keyup', (e) => weightHandler(e, 'up'))
+    return () => {
+      window.addEventListener('keydown', (e) => weightHandler(e, 'down'))
+      window.addEventListener('keyup', (e) => weightHandler(e, 'up'))
+    }
     
   }, [])
 
@@ -43,7 +57,7 @@ function App() {
     if (name === 'dijkstra') dijkstras(parArr, parArr[start.lon][start.lat], parArr[end.lon][end.lat], true, 'dijkstra')
     if (name === 'breadth_first') dijkstras(parArr, parArr[start.lon][start.lat], parArr[end.lon][end.lat], false, 'breadth_first')
     if (name === 'depth_first') dijkstras(parArr, parArr[start.lon][start.lat], parArr[end.lon][end.lat], false, 'depth_first')
-    if (name === 'bi_astar') bi_aStar(parArr, parArr[start.lon][start.lat], parArr[end.lon][end.lat])
+    // if (name === 'bi_astar') bi_aStar(parArr, parArr[start.lon][start.lat], parArr[end.lon][end.lat])
   }
 
   let prevStartLocation = start
@@ -95,11 +109,14 @@ function App() {
 
   // }, 1000)
   // console.log(destinationClicked)
+
+  
+  console.log(weight)
   return (
-    <div className="App">
+    <div  className="App">
       
       <Header algoRunner={algoRunner}/>
-      <header className="App-header">
+      <header tabIndex={0} onKeyDown={weightHandler} className="App-header">
         {parArr.map((eachPar, rowIdx) => (
           <div key={`Row-${rowIdx}`} className='flex'>
             {eachPar.map((each, colIdx) => (

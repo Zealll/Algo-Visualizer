@@ -15,7 +15,7 @@ const Header = props => {
                 <option selected disabled hidden value='N/A'>Select an Algorithm</option>
                 <option value='dijkstra'>Dijkstra</option>
                 <option value='astar'>A*</option>
-                <option value='bi_astar'>Bidirectional A*</option>
+                {/* <option value='bi_astar'>Bidirectional A*</option> */}
                 <option value='breadth_first'>Breadth First</option>
                 <option value='depth_first'>Depth First</option>
             </select>
