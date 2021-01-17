@@ -26,6 +26,10 @@ class Cell {
         this.distance = len
     }
 
+    setWeight() {
+        this.weight = Math.floor(Math.random() * 10) + 1
+    }
+
     findNeighbors(grid, algo) {
         const arr = []
         if (this.north) arr.push(grid[this.lon - 1][this.lat])

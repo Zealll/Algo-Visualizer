@@ -136,6 +136,7 @@ function App() {
                 setDestinationClicked={setDestinationClicked}
                 normalNodeClicked={normalNodeClicked}
                 setNormalNodeClicked={setNormalNodeClicked}
+                weight={weight}
               />
             ))}
           </div>
