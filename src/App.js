@@ -9,6 +9,7 @@ import Header from './header/Header.js'
 // **** Path Finding Algorithms ****
 import { dijkstras } from './algorithms/Dijkstras.js'
 import { aStar } from './algorithms/A_Star.js'
+import { bi_aStar } from './algorithms/Bidirectional_A_Star'
 
 function App() {
   const size = window.screen
@@ -20,9 +21,16 @@ function App() {
   const [clicked, setClicked] = useState(false)
   const [destinationClicked, setDestinationClicked] = useState(false)
   const [normalNodeClicked, setNormalNodeClicked] = useState(false) 
- 
+  const [weight, setWeight] = useState(false)
+  const weightHandler = e => {
+    // console.log(e.type)
+    if (e.key === 'w' && e.type === 'keydown'){
+      setWeight(true)
+    } else {
+      setWeight(false)
+    }
+  }
   useEffect(() => {
-    // parArr = []
     for (let j = 0; j < rows; j++) {
       const box = []
   
@@ -34,14 +42,23 @@ function App() {
       
       setParArr(parArr => [...parArr, box])
     }
+
+    window.addEventListener('keydown', e => weightHandler(e, 'down'))
+    window.addEventListener('keyup', e => weightHandler(e, 'up'))
+    
+    return () => {
+      window.addEventListener('keydown', (e) => weightHandler(e, 'down'))
+      window.addEventListener('keyup', (e) => weightHandler(e, 'up'))
+    }
     
   }, [])
 
   const algoRunner = name => {
     if (name === 'astar') aStar(parArr, parArr[start.lon][start.lat], parArr[end.lon][end.lat])
-    if (name === 'dijkstra') dijkstras(parArr, parArr[start.lon][start.lat], parArr[end.lon][end.lat], true, 'dijkstra')
-    if (name === 'breadth_first') dijkstras(parArr, parArr[start.lon][start.lat], parArr[end.lon][end.lat], false, 'breadth_first')
-    if (name === 'depth_first') dijkstras(parArr, parArr[start.lon][start.lat], parArr[end.lon][end.lat], false, 'depth_first')
+    if (name === 'dij') dijkstras(parArr, parArr[start.lon][start.lat], parArr[end.lon][end.lat], true, 'dijkstra')
+    if (name === 'bfs') dijkstras(parArr, parArr[start.lon][start.lat], parArr[end.lon][end.lat], false, 'breadth_first')
+    if (name === 'dfs') dijkstras(parArr, parArr[start.lon][start.lat], parArr[end.lon][end.lat], false, 'depth_first')
+    // if (name === 'bi_astar') bi_aStar(parArr, parArr[start.lon][start.lat], parArr[end.lon][end.lat])
   }
 
   let prevStartLocation = start
@@ -84,7 +101,7 @@ function App() {
         document.getElementById(`Row-${lon}-Col-${lat}`).className = 'square'
       }
     }
-}
+  }
 
   // setTimeout(() => {
   //   // dijkstras(parArr, parArr[start.lon][start.lat], parArr[end.lon][end.lat])
@@ -93,38 +110,43 @@ function App() {
 
   // }, 1000)
   // console.log(destinationClicked)
-  return (
-    <div className="App">
-      
-      <Header algoRunner={algoRunner}/>
-      <header className="App-header">
-        {parArr.map((eachPar, rowIdx) => (
-          <div key={`Row-${rowIdx}`} className='flex'>
-            {eachPar.map((each, colIdx) => (
-              <Node 
-                key={`Column-${colIdx}`}
-                cell={each}
-                grid={parArr}
-                start={start}
-                end={end}
-                nodeDragHandler={nodeDragHandler}
-                prevNodeDragHandler={prevNodeDragHandler}
-                setStart={setStart}
-                setEnd={setEnd}
-                clicked={clicked}
-                setClicked={setClicked}
-                destinationClicked={destinationClicked}
-                setDestinationClicked={setDestinationClicked}
-                normalNodeClicked={normalNodeClicked}
-                setNormalNodeClicked={setNormalNodeClicked}
-              />
-            ))}
-          </div>
-        ))}
-      </header>
-      <div>
 
+  return (
+    <div  className="App">
+
+      <Header 
+        algoRunner={algoRunner}
+      />
+
+      <div className="maze">
+        <div>
+          {parArr.map((eachPar, rowIdx) => (
+            <div key={`Row-${rowIdx}`} className='flex'>
+              {eachPar.map((each, colIdx) => (
+                <Node 
+                  key={`Column-${colIdx}`}
+                  cell={each}
+                  grid={parArr}
+                  start={start}
+                  end={end}
+                  nodeDragHandler={nodeDragHandler}
+                  prevNodeDragHandler={prevNodeDragHandler}
+                  setStart={setStart}
+                  setEnd={setEnd}
+                  clicked={clicked}
+                  setClicked={setClicked}
+                  destinationClicked={destinationClicked}
+                  setDestinationClicked={setDestinationClicked}
+                  normalNodeClicked={normalNodeClicked}
+                  setNormalNodeClicked={setNormalNodeClicked}
+                  weight={weight}
+                />
+              ))}
+            </div>
+          ))}
+        </div>
       </div>
+      
     </div>
   );
 }
