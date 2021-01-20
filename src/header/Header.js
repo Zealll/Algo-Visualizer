@@ -31,6 +31,7 @@ const Header = props => {
 
     return (
         <header onClick={e => dropdown && setDropdown('')} className="App-header">
+            <h1>Algorithm Visualizer</h1>
            <div onClick={classToggler} class="custom-select-wrapper">
                 <div class={`custom-select ${dropdown}`}>
                     <div class="custom-select__trigger"><span>{name ? name : 'Select an Algorithm'}</span>
