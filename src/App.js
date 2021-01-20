@@ -22,6 +22,7 @@ function App() {
   const [destinationClicked, setDestinationClicked] = useState(false)
   const [normalNodeClicked, setNormalNodeClicked] = useState(false) 
   const [weight, setWeight] = useState(false)
+  const [reset, setReset] = useState(false)
   const weightHandler = e => {
     // console.log(e.type)
     if (e.key === 'w' && e.type === 'keydown'){
@@ -30,7 +31,21 @@ function App() {
       setWeight(false)
     }
   }
+  console.log(parArr)
   useEffect(() => {
+    parArr.map(eachArr => (
+      eachArr.map(node => {
+        if ((node.lat !== start.lat || node.lon !== start.lon) && (node.lat !== end.lat || node.lon !== end.lon)){
+          document.getElementById(`Row-${node.lon}-Col-${node.lat}`).className = `square`
+        } else if (node.lat === start.lat && node.lon === start.lon) {
+          document.getElementById(`Row-${node.lon}-Col-${node.lat}`).className = `square start`
+        } else if (node.lat === end.lat && node.lon === end.lon) {
+          document.getElementById(`Row-${node.lon}-Col-${node.lat}`).className = `square end`
+        }
+        
+      })
+    ))
+    setParArr([])
     for (let j = 0; j < rows; j++) {
       const box = []
   
@@ -51,7 +66,7 @@ function App() {
       window.addEventListener('keyup', (e) => weightHandler(e, 'up'))
     }
     
-  }, [])
+  }, [reset])
 
   const algoRunner = name => {
     if (name === 'astar') aStar(parArr, parArr[start.lon][start.lat], parArr[end.lon][end.lat])
@@ -116,6 +131,8 @@ function App() {
 
       <Header 
         algoRunner={algoRunner}
+        reset={reset}
+        setReset={setReset}
       />
 
       <div className="maze">
