@@ -39,7 +39,7 @@ const Header = props => {
                     </div>
                     <div class="custom-options">
                         {algorithms.map(eachAlgo => (
-                            <span onClick={e => algoPicker(e, eachAlgo[1], eachAlgo[0])} class={`custom-option ${name === eachAlgo[1] ? 'selected' : ''}`}>
+                            <span onClick={e => {algoPicker(e, eachAlgo[1], eachAlgo[0]); props.setReset(!props.reset)}} class={`custom-option ${name === eachAlgo[1] ? 'selected' : ''}`}>
                                 {eachAlgo[1]}
                             </span>
                         ))}

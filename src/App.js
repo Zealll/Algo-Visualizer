@@ -33,7 +33,18 @@ function App() {
   }
   console.log(parArr)
   useEffect(() => {
-    console.log('ran')
+    parArr.map(eachArr => (
+      eachArr.map(node => {
+        if ((node.lat !== start.lat || node.lon !== start.lon) && (node.lat !== end.lat || node.lon !== end.lon)){
+          document.getElementById(`Row-${node.lon}-Col-${node.lat}`).className = `square`
+        } else if (node.lat === start.lat && node.lon === start.lon) {
+          document.getElementById(`Row-${node.lon}-Col-${node.lat}`).className = `square start`
+        } else if (node.lat === end.lat && node.lon === end.lon) {
+          document.getElementById(`Row-${node.lon}-Col-${node.lat}`).className = `square end`
+        }
+        
+      })
+    ))
     setParArr([])
     for (let j = 0; j < rows; j++) {
       const box = []
