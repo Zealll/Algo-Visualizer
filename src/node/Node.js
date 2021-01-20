@@ -27,7 +27,7 @@ const Node = props => {
                 setHasWeight(true)
             } 
         } else {
-            // Wall Node Hanmdler
+            // Wall Node Handler
             props.setNormalNodeClicked(true)
             setWall(!wall)
             props.cell.isWall = !props.cell.isWall

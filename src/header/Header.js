@@ -47,7 +47,7 @@ const Header = props => {
                 </div>
             </div> 
             <button disabled={chosenAlgo ? false : true} onClick={() => props.algoRunner(chosenAlgo)}>Start</button>
-            <button onClick={() => {}}>reset</button>
+            <button onClick={() => props.setReset(!props.reset)}>reset</button>
         </header>
     )
 }
