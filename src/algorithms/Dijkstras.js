@@ -1,6 +1,7 @@
 import { shortestPath } from '../helpers/algo_helpers.js'
 
-export function dijkstras(nodes, startNode, endNode, isWeighted, algo) {
+export function dijkstras(nodes, startNode, endNode, isWeighted, algo, setAlgoRunStatus) {
+    
     const visitedNodesInOrder = []
     startNode.setDistance(0)
     const unvisitedNodes = []
@@ -21,7 +22,7 @@ export function dijkstras(nodes, startNode, endNode, isWeighted, algo) {
             unvisitedNodes.sort((node1, node2) => node1.distance - node2.distance)
             closestNode = unvisitedNodes.shift()
         }
-        console.log(depthStack, closestNode)
+
         if (!closestNode || closestNode.distance === Infinity) {alert('There is no path to final destination!'); return}
         if (closestNode.isWall || closestNode.visited) return recursion()
         
@@ -29,7 +30,7 @@ export function dijkstras(nodes, startNode, endNode, isWeighted, algo) {
         
         visitedNodesInOrder.push(closestNode)
     
-        if(closestNode.lon === endNode.lon && closestNode.lat === endNode.lat) return shortestPath(endNode, [])
+        if(closestNode.lon === endNode.lon && closestNode.lat === endNode.lat) return shortestPath(endNode, setAlgoRunStatus)
         
         document.getElementById(`Row-${closestNode.lon}-Col-${closestNode.lat}`).className = `${document.getElementById(`Row-${closestNode.lon}-Col-${closestNode.lat}`).className} visited`
 
@@ -54,4 +55,5 @@ export function dijkstras(nodes, startNode, endNode, isWeighted, algo) {
     }
 
     recursion()
+    
 }

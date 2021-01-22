@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 
 const Header = props => {
     const [dropdown, setDropdown] = useState('')
@@ -32,22 +32,22 @@ const Header = props => {
     return (
         <header onClick={e => dropdown && setDropdown('')} className="App-header">
             <h1>Algorithm Visualizer</h1>
-           <div onClick={classToggler} class="custom-select-wrapper">
-                <div class={`custom-select ${dropdown}`}>
-                    <div class="custom-select__trigger"><span>{name ? name : 'Select an Algorithm'}</span>
-                        <div class="arrow"></div>
+           <div onClick={classToggler} className="custom-select-wrapper">
+                <div className={`custom-select ${dropdown}`}>
+                    <div className="custom-select__trigger"><span>{name ? name : 'Select an Algorithm'}</span>
+                        <div className="arrow"></div>
                     </div>
-                    <div class="custom-options">
-                        {algorithms.map(eachAlgo => (
-                            <span onClick={e => {algoPicker(e, eachAlgo[1], eachAlgo[0]); props.setReset(!props.reset)}} class={`custom-option ${name === eachAlgo[1] ? 'selected' : ''}`}>
+                    <div className="custom-options">
+                        {algorithms.map((eachAlgo, index) => (
+                            <span onClick={e => {algoPicker(e, eachAlgo[1], eachAlgo[0]); props.setReset(!props.reset)}} key={index} className={`custom-option ${name === eachAlgo[1] ? 'selected' : ''}`}>
                                 {eachAlgo[1]}
                             </span>
                         ))}
                     </div>
                 </div>
             </div> 
-            <button disabled={chosenAlgo ? false : true} onClick={() => props.algoRunner(chosenAlgo)}>Start</button>
-            <button onClick={() => props.setReset(!props.reset)}>reset</button>
+            <button disabled={chosenAlgo && !props.algoRunStatus ? false : true} onClick={() => {props.setAlgoRunStatus(true); props.algoRunner(chosenAlgo)}}>Start</button>
+            <button disabled={props.algoRunStatus} onClick={() => {props.setReset(!props.reset)}}>Reset</button>
         </header>
     )
 }
@@ -56,16 +56,3 @@ const Header = props => {
 
 
 export default Header
-
-// {/* <div className='selection-holder'>
-//                 <select  onChange={selectHandler}>
-//                     <option selected disabled hidden value='N/A'>Select an Algorithm</option>
-//                     <option value='dijkstra'>Dijkstra</option>
-//                     <option value='astar'>A*</option>
-//                     {/* <option value='bi_astar'>Bidirectional A*</option> */}
-            //         <option value='breadth_first'>Breadth First</option>
-            //         <option value='depth_first'>Depth First</option>
-            //     </select>
-            //     <button onClick={() => props.algoRunner(name)}>Start</button>
-            //     <button onClick={() => {}}>reset</button>
-            // </div> */}
