@@ -24,8 +24,7 @@ function App() {
   const [weight, setWeight] = useState(false)
   const [reset, setReset] = useState(false)
   const [algoRunStatus, setAlgoRunStatus] = useState(false)
-  
-  console.log(algoRunStatus)
+  const [mapCleanStatus, setMapCleanStatus] = useState(true)
 
   const weightHandler = e => {
     // console.log(e.type)
@@ -141,6 +140,8 @@ function App() {
         setReset={setReset}
         algoRunStatus={algoRunStatus}
         setAlgoRunStatus={setAlgoRunStatus}
+        mapCleanStatus={mapCleanStatus}
+        setMapCleanStatus={setMapCleanStatus}
       />
 
       <div className="maze">

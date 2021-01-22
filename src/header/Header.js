@@ -27,27 +27,27 @@ const Header = props => {
         ['dfs', 'Depth First']
     ]
 
-    // console.log('header')
+    // console.log(props.mapCleanStatus)
 
     return (
         <header onClick={e => dropdown && setDropdown('')} className="App-header">
             <h1>Algorithm Visualizer</h1>
-           <div onClick={classToggler} className="custom-select-wrapper">
+           <div onClick={!props.algoRunStatus && classToggler} className="custom-select-wrapper">
                 <div className={`custom-select ${dropdown}`}>
                     <div className="custom-select__trigger"><span>{name ? name : 'Select an Algorithm'}</span>
                         <div className="arrow"></div>
                     </div>
                     <div className="custom-options">
                         {algorithms.map((eachAlgo, index) => (
-                            <span onClick={e => {algoPicker(e, eachAlgo[1], eachAlgo[0]); props.setReset(!props.reset)}} key={index} className={`custom-option ${name === eachAlgo[1] ? 'selected' : ''}`}>
+                            <span onClick={e => {algoPicker(e, eachAlgo[1], eachAlgo[0]); props.setReset(!props.reset); !props.mapCleanStatus && props.setMapCleanStatus(true)}} key={index} className={`custom-option ${name === eachAlgo[1] ? 'selected' : ''}`}>
                                 {eachAlgo[1]}
                             </span>
                         ))}
                     </div>
                 </div>
             </div> 
-            <button disabled={chosenAlgo && !props.algoRunStatus ? false : true} onClick={() => {props.setAlgoRunStatus(true); props.algoRunner(chosenAlgo)}}>Start</button>
-            <button disabled={props.algoRunStatus} onClick={() => {props.setReset(!props.reset)}}>Reset</button>
+            <button disabled={chosenAlgo && props.mapCleanStatus && !props.algoRunStatus ? false : true} onClick={() => {props.setAlgoRunStatus(true); props.algoRunner(chosenAlgo); props.setMapCleanStatus(false)}}>Start</button>
+            <button disabled={props.algoRunStatus} onClick={() => {props.setReset(!props.reset); props.setMapCleanStatus(true)}}>Reset</button>
         </header>
     )
 }

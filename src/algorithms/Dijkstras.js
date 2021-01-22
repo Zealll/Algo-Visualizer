@@ -1,7 +1,6 @@
 import { shortestPath } from '../helpers/algo_helpers.js'
 
 export function dijkstras(nodes, startNode, endNode, isWeighted, algo, setAlgoRunStatus) {
-    
     const visitedNodesInOrder = []
     startNode.setDistance(0)
     const unvisitedNodes = []
