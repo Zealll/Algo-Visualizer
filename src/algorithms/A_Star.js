@@ -1,6 +1,6 @@
 import { shortestPath } from '../helpers/algo_helpers.js'
 
-export function aStar(nodes, startNode, endNode) {
+export function aStar(nodes, startNode, endNode, setAlgoRunStatus) {
     const openList = []
     const closedList = []
     // This is gonna be the F of the A* algo equation
@@ -12,7 +12,7 @@ export function aStar(nodes, startNode, endNode) {
 
         closedList.push(currentNode)
 
-        if (currentNode === endNode) return shortestPath(endNode)
+        if (currentNode === endNode) return shortestPath(endNode, setAlgoRunStatus)
         if (!currentNode) {alert('There is no path to final destination!'); return}
         if (currentNode.isWall) return recursion()
 

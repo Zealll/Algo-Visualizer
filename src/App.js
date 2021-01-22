@@ -23,6 +23,9 @@ function App() {
   const [normalNodeClicked, setNormalNodeClicked] = useState(false) 
   const [weight, setWeight] = useState(false)
   const [reset, setReset] = useState(false)
+  const [algoRunStatus, setAlgoRunStatus] = useState(false)
+  const [mapCleanStatus, setMapCleanStatus] = useState(true)
+
   const weightHandler = e => {
     // console.log(e.type)
     if (e.key === 'w' && e.type === 'keydown'){
@@ -31,7 +34,8 @@ function App() {
       setWeight(false)
     }
   }
-  console.log(parArr)
+
+
   useEffect(() => {
     parArr.map(eachArr => (
       eachArr.map(node => {
@@ -69,11 +73,12 @@ function App() {
   }, [reset])
 
   const algoRunner = name => {
-    if (name === 'astar') aStar(parArr, parArr[start.lon][start.lat], parArr[end.lon][end.lat])
-    if (name === 'dij') dijkstras(parArr, parArr[start.lon][start.lat], parArr[end.lon][end.lat], true, 'dijkstra')
-    if (name === 'bfs') dijkstras(parArr, parArr[start.lon][start.lat], parArr[end.lon][end.lat], false, 'breadth_first')
-    if (name === 'dfs') dijkstras(parArr, parArr[start.lon][start.lat], parArr[end.lon][end.lat], false, 'depth_first')
+    if (name === 'astar') aStar(parArr, parArr[start.lon][start.lat], parArr[end.lon][end.lat], setAlgoRunStatus)
+    if (name === 'dij') dijkstras(parArr, parArr[start.lon][start.lat], parArr[end.lon][end.lat], true, 'dijkstra', setAlgoRunStatus)
+    if (name === 'bfs') dijkstras(parArr, parArr[start.lon][start.lat], parArr[end.lon][end.lat], false, 'breadth_first', setAlgoRunStatus)
+    if (name === 'dfs') dijkstras(parArr, parArr[start.lon][start.lat], parArr[end.lon][end.lat], false, 'depth_first', setAlgoRunStatus)
     // if (name === 'bi_astar') bi_aStar(parArr, parArr[start.lon][start.lat], parArr[end.lon][end.lat])
+    // setAlgoRunStatus(false)
   }
 
   let prevStartLocation = start
@@ -133,6 +138,10 @@ function App() {
         algoRunner={algoRunner}
         reset={reset}
         setReset={setReset}
+        algoRunStatus={algoRunStatus}
+        setAlgoRunStatus={setAlgoRunStatus}
+        mapCleanStatus={mapCleanStatus}
+        setMapCleanStatus={setMapCleanStatus}
       />
 
       <div className="maze">
