@@ -4,7 +4,9 @@ import React, {useState, useEffect} from 'react';
 import Node from './node/Node.js'
 import Cell from './node/Cell.js'
 
+// Components
 import Header from './header/Header.js'
+import Modal from './modal/Modal.js'
 
 // **** Path Finding Algorithms ****
 import { dijkstras } from './algorithms/Dijkstras.js'
@@ -16,8 +18,8 @@ function App() {
   const [parArr, setParArr] = useState([])
   let rows = Math.floor((size.availHeight / 100 * 70) / 20)
   let columns = Math.floor((size.availWidth / 100 * 90) / 20)
-  const [start, setStart] = useState({lon: 13, lat: 20})
-  const [end, setEnd] = useState({lon: 13, lat: 40})
+  const [start, setStart] = useState({lon: Math.floor(rows / 2), lat: Math.floor(columns / 4)})
+  const [end, setEnd] = useState({lon: Math.floor(rows / 2), lat: Math.floor(columns / 4) * 3})
   const [clicked, setClicked] = useState(false)
   const [destinationClicked, setDestinationClicked] = useState(false)
   const [normalNodeClicked, setNormalNodeClicked] = useState(false) 
@@ -25,7 +27,6 @@ function App() {
   const [reset, setReset] = useState(false)
   const [algoRunStatus, setAlgoRunStatus] = useState(false)
   const [mapCleanStatus, setMapCleanStatus] = useState(true)
-
   const weightHandler = e => {
     // console.log(e.type)
     if (e.key === 'w' && e.type === 'keydown'){
@@ -64,10 +65,20 @@ function App() {
 
     window.addEventListener('keydown', e => weightHandler(e, 'down'))
     window.addEventListener('keyup', e => weightHandler(e, 'up'))
+    window.addEventListener('click', e => {
+      if (e.target.className === 'Modal-Container') {
+        document.getElementsByClassName('Modal-Container')[0].className = 'Modal-Container none'
+      }  
+    })
     
     return () => {
-      window.addEventListener('keydown', (e) => weightHandler(e, 'down'))
-      window.addEventListener('keyup', (e) => weightHandler(e, 'up'))
+      window.removeEventListener('keydown', (e) => weightHandler(e, 'down'))
+      window.removeEventListener('keyup', (e) => weightHandler(e, 'up'))
+      window.removeEventListener('click', e => {
+        if (e.target.className === 'Modal-Container') {
+          document.getElementsByClassName('Modal-Container')[0].className = 'Modal-Container none'
+        }  
+      })
     }
     
   }, [reset])
@@ -123,14 +134,6 @@ function App() {
     }
   }
 
-  // setTimeout(() => {
-  //   // dijkstras(parArr, parArr[start.lon][start.lat], parArr[end.lon][end.lat])
-  //   // aStar(parArr, parArr[start.lon][start.lat], parArr[end.lon][end.lat])
-  //   depthFirst(parArr)
-
-  // }, 1000)
-  // console.log(destinationClicked)
-
   return (
     <div  className="App">
 
@@ -143,6 +146,8 @@ function App() {
         mapCleanStatus={mapCleanStatus}
         setMapCleanStatus={setMapCleanStatus}
       />
+
+      <Modal />
 
       <div className="maze">
         <div>
