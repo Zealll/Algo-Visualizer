@@ -1,22 +1,26 @@
 {
   "files": {
-    "main.css": "/Algo-Visualizer/static/css/main.6f0290d3.chunk.css",
-    "main.js": "/Algo-Visualizer/static/js/main.1b974c82.chunk.js",
-    "main.js.map": "/Algo-Visualizer/static/js/main.1b974c82.chunk.js.map",
+    "main.css": "/Algo-Visualizer/static/css/main.d2e34b9f.chunk.css",
+    "main.js": "/Algo-Visualizer/static/js/main.5753b2e1.chunk.js",
+    "main.js.map": "/Algo-Visualizer/static/js/main.5753b2e1.chunk.js.map",
     "runtime-main.js": "/Algo-Visualizer/static/js/runtime-main.7f7ff218.js",
     "runtime-main.js.map": "/Algo-Visualizer/static/js/runtime-main.7f7ff218.js.map",
-    "static/js/2.82386e2a.chunk.js": "/Algo-Visualizer/static/js/2.82386e2a.chunk.js",
-    "static/js/2.82386e2a.chunk.js.map": "/Algo-Visualizer/static/js/2.82386e2a.chunk.js.map",
+    "static/js/2.55ed7257.chunk.js": "/Algo-Visualizer/static/js/2.55ed7257.chunk.js",
+    "static/js/2.55ed7257.chunk.js.map": "/Algo-Visualizer/static/js/2.55ed7257.chunk.js.map",
     "index.html": "/Algo-Visualizer/index.html",
-    "precache-manifest.d106ac3498b98004f930cfe89e1301d2.js": "/Algo-Visualizer/precache-manifest.d106ac3498b98004f930cfe89e1301d2.js",
+    "precache-manifest.2c941ab3d1a12def8ef8876fca68c66a.js": "/Algo-Visualizer/precache-manifest.2c941ab3d1a12def8ef8876fca68c66a.js",
     "service-worker.js": "/Algo-Visualizer/service-worker.js",
-    "static/css/main.6f0290d3.chunk.css.map": "/Algo-Visualizer/static/css/main.6f0290d3.chunk.css.map",
-    "static/js/2.82386e2a.chunk.js.LICENSE.txt": "/Algo-Visualizer/static/js/2.82386e2a.chunk.js.LICENSE.txt"
+    "static/css/main.d2e34b9f.chunk.css.map": "/Algo-Visualizer/static/css/main.d2e34b9f.chunk.css.map",
+    "static/js/2.55ed7257.chunk.js.LICENSE.txt": "/Algo-Visualizer/static/js/2.55ed7257.chunk.js.LICENSE.txt",
+    "static/media/Algo.PNG": "/Algo-Visualizer/static/media/Algo.fd97a678.PNG",
+    "static/media/Search_Video.gif": "/Algo-Visualizer/static/media/Search_Video.b86efad6.gif",
+    "static/media/Walls_Video.gif": "/Algo-Visualizer/static/media/Walls_Video.397f54e9.gif",
+    "static/media/Weight_Video.gif": "/Algo-Visualizer/static/media/Weight_Video.8108ede9.gif"
   },
   "entrypoints": [
     "static/js/runtime-main.7f7ff218.js",
-    "static/js/2.82386e2a.chunk.js",
-    "static/css/main.6f0290d3.chunk.css",
-    "static/js/main.1b974c82.chunk.js"
+    "static/js/2.55ed7257.chunk.js",
+    "static/css/main.d2e34b9f.chunk.css",
+    "static/js/main.5753b2e1.chunk.js"
   ]
 }
