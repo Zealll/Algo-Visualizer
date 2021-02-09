@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import StepOne from './modal-parts/StepOne.js'
-import StepTwo from './modal-parts/StepTwo.js'
 import StepThree from './modal-parts/StepThree.js'
 import StepFour from './modal-parts/StepFour.js'
+import StepFive from './modal-parts/StepFive.js'
+import StepTwo from './modal-parts/StepTwo.js'
 
 const Modal = props => {
     const [display, setDisplay] = useState(JSON.parse(!localStorage.getItem('modal-state-disabled')))
@@ -12,7 +13,7 @@ const Modal = props => {
 
         if (dir === 'prev' && page > 1) {
             setPage(page - 1)
-        } else if (dir === 'next' && page < 4) {
+        } else if (dir === 'next' && page < 5) {
             setPage(page + 1)
         }
     }
@@ -26,11 +27,12 @@ const Modal = props => {
                 {page === 2 && <StepTwo />}
                 {page === 3 && <StepThree />}
                 {page === 4 && <StepFour />}
+                {page === 5 && <StepFive />}
                 <div className='modal-nav-buttons'>
                     <button onClick={() => {localStorage.setItem('modal-state-disabled', 'true'); setDisplay(false)}}>Don't Show Again</button>
                     <div>
                         <button onClick={(e) => safePageSetter(e, 'prev')} disabled={page === 1 ? true :  false}>Previous</button>
-                        {page === 4 ? <button onClick={() => setDisplay(false)}>Close</button> : <button onClick={(e) => safePageSetter(e, 'next')}>Next</button>}
+                        {page === 5 ? <button onClick={() => setDisplay(false)}>Close</button> : <button onClick={(e) => safePageSetter(e, 'next')}>Next</button>}
                     </div>
                 </div>
             </div>

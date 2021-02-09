@@ -1,13 +1,14 @@
 import React from 'react'
-import searchVideo from '../../resources/Search_Video.gif'
+import weightVideo from '../../resources/Weight_Video.gif'
+
 const StepFour = () => {
 
     return (
         <div className='steps-container'>
-            <h3>Step 4</h3>
-            <img className='step-image' autoPlay src={searchVideo} alt='GIF demonstration of finding Shortest Path' />
-            <h4>Once you have selected your desired <span>Algorithm</span>, you can press <span>START</span> Button.</h4>
-            <h4>This will demonstrate how the specified Algorithm traverses the map to find the <span>Shortest Path</span>.</h4>
+            <h3>Step 4 (Optional)</h3>
+            <img className='step-image' src={weightVideo} alt='GIF demonstration of creating Weighted Obstacles' />
+            <h4>With <span>weighted</span> Algorithms you can create Weighted Obstacles</h4>
+            <h4>In order to create <span>Weighted Obstacles</span> press <span>"W + Left Button of your Mouse"</span></h4>
         </div>
     )
 }
