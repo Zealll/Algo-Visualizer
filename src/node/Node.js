@@ -26,10 +26,7 @@ const Node = props => {
         } else {
             // Wall Node Handler When Clicking
             props.setNormalNodeClicked(true)
-            console.log('before', e.target.className)
             props.cell.isWall = !props.cell.isWall
-            setWall(!wall)
-            console.log('after', e.target.className)  
         }
     }
 
