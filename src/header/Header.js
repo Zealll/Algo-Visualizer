@@ -46,7 +46,7 @@ const Header = props => {
                     </div>
                 </div>
             </div> 
-            <button disabled={chosenAlgo && props.mapCleanStatus && !props.algoRunStatus ? false : true} onClick={() => {props.setAlgoRunStatus(true); props.algoRunner(chosenAlgo); props.setMapCleanStatus(false)}}>Start</button>
+            <button disabled={chosenAlgo && props.mapCleanStatus && !props.algoRunStatus ? false : true} onClick={() => {props.setAlgoRunStatus(true); props.algoRunner(chosenAlgo); props.setMapCleanStatus(false); props.setFirstAlgoRan(true)}}>Start</button>
             <button disabled={props.algoRunStatus} onClick={() => {props.setReset(!props.reset); props.setMapCleanStatus(true)}}>Reset</button>
         </header>
     )
