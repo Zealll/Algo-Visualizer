@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "c3b98bce4faf4acdbdb9dededff346d3",
+    "revision": "d084c9b776965a2ca4d2650103d15234",
     "url": "/Algo-Visualizer/index.html"
   },
   {
-    "revision": "d79c6925649a65a1eb90",
+    "revision": "7d6935cf88495ab02c6f",
     "url": "/Algo-Visualizer/static/css/main.d2e34b9f.chunk.css"
   },
   {
-    "revision": "1f3d8362c67202659d2a",
-    "url": "/Algo-Visualizer/static/js/2.55ed7257.chunk.js"
+    "revision": "889ed6e46a8fd82e02a2",
+    "url": "/Algo-Visualizer/static/js/2.fd8861d0.chunk.js"
   },
   {
     "revision": "e88a3e95b5364d46e95b35ae8c0dc27d",
-    "url": "/Algo-Visualizer/static/js/2.55ed7257.chunk.js.LICENSE.txt"
+    "url": "/Algo-Visualizer/static/js/2.fd8861d0.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "d79c6925649a65a1eb90",
-    "url": "/Algo-Visualizer/static/js/main.5753b2e1.chunk.js"
+    "revision": "7d6935cf88495ab02c6f",
+    "url": "/Algo-Visualizer/static/js/main.32ae7745.chunk.js"
   },
   {
     "revision": "a3ca8227dace900e153e",
@@ -26,6 +26,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "fd97a678acf8bb3da9917a407fff951c",
     "url": "/Algo-Visualizer/static/media/Algo.fd97a678.PNG"
+  },
+  {
+    "revision": "b0a96213130e7015b4dae1436854b343",
+    "url": "/Algo-Visualizer/static/media/Point_Move_Video.b0a96213.gif"
   },
   {
     "revision": "b86efad6f0e2e0aa512646ecd18fec08",
