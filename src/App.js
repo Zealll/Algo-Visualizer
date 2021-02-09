@@ -27,7 +27,7 @@ function App() {
   const [reset, setReset] = useState(false)
   const [algoRunStatus, setAlgoRunStatus] = useState(false)
   const [mapCleanStatus, setMapCleanStatus] = useState(true)
-  const [firstAlgoRan, setFirstAlgoRan] = useState(false)
+  const [auto_reset_after_algo_ran_enabled, set_auto_reset_after_algo_ran_enabled] = useState(false)
   const weightHandler = e => {
     // console.log(e.type)
     if (e.key === 'w' && e.type === 'keydown'){
@@ -41,6 +41,13 @@ function App() {
   useEffect(() => {
     parArr.map(eachArr => (
       eachArr.map(node => {
+        node.distance = Infinity
+        node.visited = false
+        node.weight = 0
+        node.h = 0
+        node.f = 0
+        node.prevNode = null
+        node.isWall = false
         if ((node.lat !== start.lat || node.lon !== start.lon) && (node.lat !== end.lat || node.lon !== end.lon)){
           document.getElementById(`Row-${node.lon}-Col-${node.lat}`).className = `square`
         } else if (node.lat === start.lat && node.lon === start.lon) {
@@ -51,18 +58,22 @@ function App() {
         
       })
     ))
-    setParArr([])
-    for (let j = 0; j < rows; j++) {
-      const box = []
-  
-      for (let i = 0; i < columns; i++) {
-        const cell = new Cell(j, i, rows - 1, columns - 1)
-  
-        box.push(cell)
+    if (!auto_reset_after_algo_ran_enabled){
+      console.log('Array Ran')
+      setParArr([])
+      for (let j = 0; j < rows; j++) {
+        const box = []
+    
+        for (let i = 0; i < columns; i++) {
+          const cell = new Cell(j, i, rows - 1, columns - 1)
+    
+          box.push(cell)
+        }
+        
+        setParArr(parArr => [...parArr, box])
       }
-      
-      setParArr(parArr => [...parArr, box])
     }
+    
 
     window.addEventListener('keydown', e => weightHandler(e, 'down'))
     window.addEventListener('keyup', e => weightHandler(e, 'up'))
@@ -146,8 +157,8 @@ function App() {
         setAlgoRunStatus={setAlgoRunStatus}
         mapCleanStatus={mapCleanStatus}
         setMapCleanStatus={setMapCleanStatus}
-        firstAlgoRan={firstAlgoRan}
-        setFirstAlgoRan={setFirstAlgoRan}
+        auto_reset_after_algo_ran_enabled={auto_reset_after_algo_ran_enabled}
+        set_auto_reset_after_algo_ran_enabled={set_auto_reset_after_algo_ran_enabled}
       />
 
       <Modal />

@@ -39,15 +39,15 @@ const Header = props => {
                     </div>
                     <div className="custom-options">
                         {algorithms.map((eachAlgo, index) => (
-                            <span onClick={e => {algoPicker(e, eachAlgo[1], eachAlgo[0]); props.firstAlgoRan && props.setReset(!props.reset); !props.mapCleanStatus && props.setMapCleanStatus(true)}} key={index} className={`custom-option ${name === eachAlgo[1] ? 'selected' : ''}`}>
+                            <span onClick={e => {algoPicker(e, eachAlgo[1], eachAlgo[0]); props.auto_reset_after_algo_ran_enabled && props.setReset(!props.reset); !props.mapCleanStatus && props.setMapCleanStatus(true); props.set_auto_reset_after_algo_ran_enabled(false)}} key={index} className={`custom-option ${name === eachAlgo[1] ? 'selected' : ''}`}>
                                 {eachAlgo[1]}
                             </span>
                         ))}
                     </div>
                 </div>
             </div> 
-            <button disabled={chosenAlgo && props.mapCleanStatus && !props.algoRunStatus ? false : true} onClick={() => {props.setAlgoRunStatus(true); props.algoRunner(chosenAlgo); props.setMapCleanStatus(false); props.setFirstAlgoRan(true)}}>Start</button>
-            <button disabled={props.algoRunStatus} onClick={() => {props.setReset(!props.reset); props.setMapCleanStatus(true)}}>Reset</button>
+            <button disabled={chosenAlgo && props.mapCleanStatus && !props.algoRunStatus ? false : true} onClick={() => {props.setAlgoRunStatus(true); props.algoRunner(chosenAlgo); props.setMapCleanStatus(false); props.set_auto_reset_after_algo_ran_enabled(true)}}>Start</button>
+            <button disabled={props.algoRunStatus} onClick={() => {props.setReset(!props.reset); props.setMapCleanStatus(true); props.set_auto_reset_after_algo_ran_enabled(false)}}>Reset</button>
         </header>
     )
 }

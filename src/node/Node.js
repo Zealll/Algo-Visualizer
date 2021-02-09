@@ -5,10 +5,7 @@ const Node = props => {
     const [visited, setVisited] = useState(props.cell.visited)
     const [wall, setWall] = useState(props.cell.isWall)
     const [hasWeight, setHasWeight] = useState(props.cell.weight > 0 ? true : false)
-
-    const clickHandler = () => {
-        // setVisited(props.cell.visit())
-    }
+    const [random, setRandom] = useState(false)
 
     const nodeClickHandler = e => {
         e.preventDefault();
@@ -27,10 +24,12 @@ const Node = props => {
                 setHasWeight(true)
             } 
         } else {
-            // Wall Node Handler
+            // Wall Node Handler When Clicking
             props.setNormalNodeClicked(true)
-            setWall(!wall)
+            console.log('before', e.target.className)
             props.cell.isWall = !props.cell.isWall
+            setWall(!wall)
+            console.log('after', e.target.className)  
         }
     }
 
@@ -49,13 +48,16 @@ const Node = props => {
 
     const obstacleHandler = e => {
         e.preventDefault()
+
         if (props.weight && props.normalNodeClicked) {
             if (props.cell.weight === 0) {
                 props.cell.setWeight()
                 setHasWeight(true)
             } 
         } else if (props.normalNodeClicked) {
+            // Wall Node Handler When Dragging While Clicked
             setWall(!wall)
+            
             props.cell.isWall = !props.cell.isWall
         }
         
@@ -63,7 +65,7 @@ const Node = props => {
 
     return (
         <div
-          onMouseDown={(e) => nodeClickHandler(e)} 
+          onMouseDown={nodeClickHandler} 
           onMouseUp={(e) => {
               props.setClicked(false); 
               props.setDestinationClicked(false); 
@@ -72,12 +74,15 @@ const Node = props => {
             //   props.clicked !== props.destinationClicked && locationSetter(e)
             }
           } 
-          onMouseEnter={(e) => {props.nodeDragHandler(e, props.cell.lon, props.cell.lat); obstacleHandler(e)}} 
+          onMouseEnter={(e) => {
+              props.nodeDragHandler(e, props.cell.lon, props.cell.lat); 
+              obstacleHandler(e)
+            }
+          } 
           onMouseLeave={(e) => props.prevNodeDragHandler(e, props.cell.lon, props.cell.lat)}
-          onClick={() => {clickHandler()}} 
 
           id={`Row-${props.cell.lon}-Col-${props.cell.lat}`} 
-          className={visited ? `square visited ${props.start.lon === props.cell.lon & props.start.lat === props.cell.lat ? 'start' : ' '} ${props.end.lon === props.cell.lon & props.end.lat === props.cell.lat ? 'end' : ' '}` : `square ${props.start.lon === props.cell.lon & props.start.lat === props.cell.lat ? 'start' : ' '} ${props.end.lon === props.cell.lon & props.end.lat === props.cell.lat ? 'end' : ' '} ${wall ? 'wall' : ''} ${hasWeight ? 'weighted' : ''}`}>
+          className={visited ? `square visited ${props.start.lon === props.cell.lon & props.start.lat === props.cell.lat ? 'start' : ' '} ${props.end.lon === props.cell.lon & props.end.lat === props.cell.lat ? 'end' : ' '}` : `square ${props.start.lon === props.cell.lon & props.start.lat === props.cell.lat ? 'start' : ' '} ${props.end.lon === props.cell.lon & props.end.lat === props.cell.lat ? 'end' : ' '} ${props.cell.isWall ? 'wall' : ''} ${hasWeight ? 'weighted' : ''}`}>
         </div>
     )
 }
