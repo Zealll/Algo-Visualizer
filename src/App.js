@@ -27,6 +27,7 @@ function App() {
   const [reset, setReset] = useState(false)
   const [algoRunStatus, setAlgoRunStatus] = useState(false)
   const [mapCleanStatus, setMapCleanStatus] = useState(true)
+  const [firstAlgoRan, setFirstAlgoRan] = useState(false)
   const weightHandler = e => {
     // console.log(e.type)
     if (e.key === 'w' && e.type === 'keydown'){
@@ -145,6 +146,8 @@ function App() {
         setAlgoRunStatus={setAlgoRunStatus}
         mapCleanStatus={mapCleanStatus}
         setMapCleanStatus={setMapCleanStatus}
+        firstAlgoRan={firstAlgoRan}
+        setFirstAlgoRan={setFirstAlgoRan}
       />
 
       <Modal />

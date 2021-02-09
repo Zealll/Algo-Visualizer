@@ -1,14 +1,13 @@
 import React from 'react'
-import weightVideo from '../../resources/Weight_Video.gif'
+import wallVideo from '../../resources/Walls_Video.gif'
 
 const StepThree = () => {
-
     return (
         <div className='steps-container'>
             <h3>Step 3 (Optional)</h3>
-            <img className='step-image' src={weightVideo} alt='GIF demonstration of creating Weighted Obstacles' />
-            <h4>With <span>weighted</span> Algorithms you can create Weighted Obstacles</h4>
-            <h4>In order to create <span>Weighted Obstacles</span> press <span>"W + Left Button of your Mouse"</span></h4>
+            <img className='step-image' autoPlay src={wallVideo} alt='GIF demonstration of creating walls' />
+            <h4>Click your <span>left mouse button</span> to turn a single Cell into a wall.</h4>
+            <h4>Click your <span>left mouse button</span> and drag it to turn several Cells into walls.</h4>
         </div>
     )
 }
