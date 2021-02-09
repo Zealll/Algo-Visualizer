@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/Algo-Visualizer/static/css/main.d2e34b9f.chunk.css",
-    "main.js": "/Algo-Visualizer/static/js/main.45fd4da0.chunk.js",
-    "main.js.map": "/Algo-Visualizer/static/js/main.45fd4da0.chunk.js.map",
+    "main.js": "/Algo-Visualizer/static/js/main.043bca70.chunk.js",
+    "main.js.map": "/Algo-Visualizer/static/js/main.043bca70.chunk.js.map",
     "runtime-main.js": "/Algo-Visualizer/static/js/runtime-main.7f7ff218.js",
     "runtime-main.js.map": "/Algo-Visualizer/static/js/runtime-main.7f7ff218.js.map",
     "static/js/2.fd8861d0.chunk.js": "/Algo-Visualizer/static/js/2.fd8861d0.chunk.js",
     "static/js/2.fd8861d0.chunk.js.map": "/Algo-Visualizer/static/js/2.fd8861d0.chunk.js.map",
     "index.html": "/Algo-Visualizer/index.html",
-    "precache-manifest.cca94b0beffc224981d9da2a5465f108.js": "/Algo-Visualizer/precache-manifest.cca94b0beffc224981d9da2a5465f108.js",
+    "precache-manifest.70579e2713dd9ebbfe78e4e7f696383d.js": "/Algo-Visualizer/precache-manifest.70579e2713dd9ebbfe78e4e7f696383d.js",
     "service-worker.js": "/Algo-Visualizer/service-worker.js",
     "static/css/main.d2e34b9f.chunk.css.map": "/Algo-Visualizer/static/css/main.d2e34b9f.chunk.css.map",
     "static/js/2.fd8861d0.chunk.js.LICENSE.txt": "/Algo-Visualizer/static/js/2.fd8861d0.chunk.js.LICENSE.txt",
@@ -22,6 +22,6 @@
     "static/js/runtime-main.7f7ff218.js",
     "static/js/2.fd8861d0.chunk.js",
     "static/css/main.d2e34b9f.chunk.css",
-    "static/js/main.45fd4da0.chunk.js"
+    "static/js/main.043bca70.chunk.js"
   ]
 }
