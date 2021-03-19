@@ -29,8 +29,8 @@ export function shortestPath(endNode, setAlgoRunStatus) {
     }
 
     animatePath()
-    
+
     // This is the Setter Hook that is initialized in the App Component, and is being passed down through "aStar" function.
-    // It enables the Reset/Start Button, as well as switching Algorithms!
+    // It enables the Reset/Start Button, as well as switching to different Algorithms!
     setAlgoRunStatus(false)
 }
