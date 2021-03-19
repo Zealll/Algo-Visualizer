@@ -10,7 +10,7 @@ export function aStar(nodes, startNode, endNode, setAlgoRunStatus) {
     startNode.setDistance(0)
     unvisited.push(startNode)
 
-    function node_traverse() {
+    function graph_traverse() {
         // Grabs the current Nodes neighboring node that has the shortest distance
         let currentNode = unvisited.sort((node1, node2) => node1.distance - node2.distance).shift()
 
@@ -25,9 +25,9 @@ export function aStar(nodes, startNode, endNode, setAlgoRunStatus) {
         // indicating that the shortest path has been found, which will allow the user to interact with verything again.
         if (currentNode === endNode) return shortestPath(endNode, setAlgoRunStatus)
         if (!currentNode) {alert('There is no path to final destination!'); return}
-        // If the current node is a wall, that means that we cannot pass through it, so we just call our "node_traverse"
+        // If the current node is a wall, that means that we cannot pass through it, so we just call our "graph_traverse"
         // recursively and move to the next node
-        if (currentNode.isWall) return node_traverse()
+        if (currentNode.isWall) return graph_traverse()
 
         // It changes the Node Object's "visited" property to "true", this property helps us to efficiently
         // find neighbors of our current node that have not been visited yet
@@ -57,11 +57,11 @@ export function aStar(nodes, startNode, endNode, setAlgoRunStatus) {
         // because of the fact that we the algorithm will be fast, "setTimeout" let's us call the 
         // recurse function with a timeout of 10 milliseconds, so that it can be slowed down, and visualized
         setTimeout(() => {
-            return node_traverse()
+            return graph_traverse()
         }, 10)
     }
 
-    node_traverse()
+    graph_traverse()
 }
 
 
